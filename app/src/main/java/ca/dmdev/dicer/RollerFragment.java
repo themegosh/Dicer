@@ -1,5 +1,6 @@
 package ca.dmdev.dicer;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -68,10 +69,10 @@ public class RollerFragment extends Fragment {
         myDialog.setContentView(R.layout.roll_dilogue);
 
         TextView txtRollTotal = (TextView) myDialog.findViewById(R.id.txtRollTotal);
-        txtRollTotal.setText(String.valueOf(sq.lastTotal));
+        txtRollTotal.setText(String.valueOf(sq.getLastTotal()));
         TextView txtSequenceData = (TextView) myDialog.findViewById(R.id.txtSequenceData);
-        txtSequenceData.setText(sq.lastSequence);
-
+        txtSequenceData.setText(sq.getLastSequence());
+        ((MainActivity) getActivity()).addSequenceToHistory(sq); //add sequence to history
         myDialog.show();
     }
     public void fabClearOnClick(View v) {

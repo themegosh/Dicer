@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="?android:attr/listPreferredItemHeight"
@@ -6,52 +6,19 @@
     tools:context=".MainActivity$HistoryFragment">
 
     <TextView
-        android:id="@+id/rollResult"
         android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="6dip"
-        android:gravity="center"
-        android:text="Roll"
-        android:clickable="true" />
-
-    <TextView
-        android:id="@+id/rollSequence"
-        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/rollData"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignWithParentIfMissing="true"
-        android:layout_toRightOf="@id/rollResult"
-        android:gravity="center_vertical"
-        android:text="Ex: 1d6+4d8"
-        android:textSize="16sp" />
+        android:text="New Text"
+        android:id="@+id/testTextView" />
 
-    <TextView
-        android:id="@+id/rollData"
-        android:layout_width="fill_parent"
-        android:layout_height="26dip"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_toRightOf="@+id/rollResult"
-        android:ellipsize="marquee"
-        android:singleLine="true"
-        android:text="Ex: 1d6: (6) + 4d8: (3,5,1,8)"
-        android:textSize="12sp" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/historyRecycleView"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
-    <ImageButton
-        android:id="@+id/btnMenu"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="6dip"
-        android:gravity="center"
-        android:text="Roll"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentLeft="false"
-        android:src="@drawable/abc_ic_menu_moreoverflow_mtrl_alpha" />
 
-</RelativeLayout>
+
+
+
+</LinearLayout >

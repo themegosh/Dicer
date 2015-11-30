@@ -13,6 +13,9 @@ public class SequenceHistory {
 
     }
 
+    public String getStr(int id) {
+        return String.valueOf(history.get(id).getLastTotal());
+    }
 
     public void addSequence(Sequence sq) {
         history.add(sq);
@@ -24,5 +27,9 @@ public class SequenceHistory {
 
     public void remove(int id) {
         history.remove(id);
+    }
+
+    public int count(){
+        return history.size();
     }
 }

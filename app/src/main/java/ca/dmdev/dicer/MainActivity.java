@@ -28,11 +28,14 @@ public class MainActivity extends AppCompatActivity {
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
     private int currentTabIndex;
+    private SequenceHistory sequenceHistory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        sequenceHistory = new SequenceHistory();
 
         // Create the adapter that will return a fragment for each tab
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -89,6 +92,14 @@ public class MainActivity extends AppCompatActivity {
         if (currentTabIndex == POSITION_ROLLER) { //only call save when in the roller fragment
             mSectionsPagerAdapter.rollerFragment.fabSaveOnClick(v);
         }
+    }
+
+    public void addSequenceToHistory(Sequence sq) {
+        sequenceHistory.addSequence(sq);
+        //TODO: update sequence history in tab
+    }
+    public SequenceHistory getSequenceHistory(){
+        return sequenceHistory;
     }
 
 }

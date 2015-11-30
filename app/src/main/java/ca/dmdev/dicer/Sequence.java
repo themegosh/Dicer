@@ -9,8 +9,8 @@ import java.util.ArrayList;
  */
 public class Sequence {
     ArrayList<Object> sq; //this is the object array of dice, numbers and operators, store sequentially
-    String lastSequence = "";
-    int lastTotal;
+    private String lastSequence = "";
+    private int lastTotal;
 
     //constructor
     public Sequence(){
@@ -130,7 +130,14 @@ public class Sequence {
             else
                 Log.d("Dicer CRITCAL ERRROR: ", "reRoll sq.get(i) resulted in non-operator, non-number, non-int, non-dice"); //this will probably crash
         }
+    }
 
+    public int getLastTotal(){
+        return lastTotal;
+    }
+
+    public String getLastSequence() {
+        return lastSequence;
     }
 
 }
