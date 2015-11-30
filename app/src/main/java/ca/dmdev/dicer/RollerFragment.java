@@ -1,9 +1,9 @@
 package ca.dmdev.dicer;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +39,7 @@ public class RollerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.roller_layout, container, false);
+        View v = inflater.inflate(R.layout.roller_fragment, container, false);
 
         txtSequence = (TextView) v.findViewById(R.id.txtSequence);
         sq = new Sequence();

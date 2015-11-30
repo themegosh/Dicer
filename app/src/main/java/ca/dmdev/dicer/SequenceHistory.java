@@ -1,5 +1,7 @@
 package ca.dmdev.dicer;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 /**
@@ -14,11 +16,14 @@ public class SequenceHistory {
     }
 
     public String getStr(int id) {
+        Log.d("Dicer:", "SequenceHistory: getStr: lastTotal:" + String.valueOf(history.get(id).getLastTotal()) + " id: " + String.valueOf(id));
         return String.valueOf(history.get(id).getLastTotal());
     }
 
     public void addSequence(Sequence sq) {
+        Log.d("Dicer:", "SequenceHistory: add: sq.toString():" + sq.toString() + " lastTotal: " + sq.getLastTotal() + " size: " + String.valueOf(history.size()));
         history.add(sq);
+        Log.d("Dicer:", "SequenceHistory: AFTER add: sq.toString():" + history.get(history.size() - 1).toString() + " lastTotal: " + history.get(history.size() - 1).getLastTotal() + " size: " + String.valueOf(history.size()));
     }
 
     public void clear() {
@@ -29,7 +34,7 @@ public class SequenceHistory {
         history.remove(id);
     }
 
-    public int count(){
+    public int size(){
         return history.size();
     }
 }

@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.TextView;
 
 /**
@@ -32,12 +33,16 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     // Create new views (invoked by the layout manager)
     @Override
     public HistoryAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                   int viewType) {
+                                                        int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.history_layout, parent, false);
+                .inflate(R.layout.history_row_layout, parent, false);
+
+            //((ViewGroup) v.getParent()).removeView(v);
+        View vp = v.findViewById(R.id.txtRollHistoryTotal);
+        ((ViewGroup)vp.getParent()).removeView(vp);
         // set the view's size, margins, paddings and layout parameters
-        ViewHolder vh = new ViewHolder((TextView)v.findViewById(R.id.testTextView));
+        ViewHolder vh = new ViewHolder((TextView)vp);
         return vh;
     }
 
@@ -46,13 +51,13 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     public void onBindViewHolder(ViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.mTextView.setText(mDataset.getStr(0));
+        holder.mTextView.setText(mDataset.getStr(position));
 
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return mDataset.count();
+        return mDataset.size();
     }
 }

@@ -30,12 +30,14 @@ public class MainActivity extends AppCompatActivity {
     private int currentTabIndex;
     private SequenceHistory sequenceHistory;
 
+    public MainActivity(){
+        sequenceHistory = new SequenceHistory();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        sequenceHistory = new SequenceHistory();
 
         // Create the adapter that will return a fragment for each tab
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -46,7 +48,8 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(mViewPager);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) { }
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
 
             @Override
             public void onPageSelected(int position) {
@@ -61,6 +64,11 @@ public class MainActivity extends AppCompatActivity {
                     currentTabIndex = POSITION_FAVOURITE;
                     fabClear.hide();
                     fabSave.hide();
+                    Log.d("Dicer:", "SequenceHistory: ----BEGIN DUMP----");
+                    for (int i = 0; i < sequenceHistory.size(); i++){
+                        Log.d("Dicer:", "SequenceHistory: sequenceHistory.get(" + i + "): " + sequenceHistory.getStr(i));
+                    }
+                    Log.d("Dicer:", "SequenceHistory: ----END DUMP----");
                 } else {
                     currentTabIndex = POSITION_HISTORY;
                     fabClear.show(); //show only clear all history button
@@ -69,7 +77,8 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onPageScrollStateChanged(int state) {  }
+            public void onPageScrollStateChanged(int state) {
+            }
         });
     }
 
