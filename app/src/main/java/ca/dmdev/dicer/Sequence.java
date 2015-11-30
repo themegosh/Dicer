@@ -8,10 +8,11 @@ import java.util.ArrayList;
  * Created by mathe_000 on 2015-11-28.
  */
 public class Sequence {
-    ArrayList<Object> sq;
+    ArrayList<Object> sq; //this is the object array of dice, numbers and operators, store sequentially
     String lastSequence = "";
     int lastTotal;
 
+    //constructor
     public Sequence(){
         sq = new ArrayList<>();
     }
@@ -36,7 +37,7 @@ public class Sequence {
                 aDice.addCount(((int) sq.get(sq.size() - 1)) - 1); //addNum the number to the dice count
                 sq.set(sq.size() - 1, aDice); //update dice object
             }
-            else { //last object was operand
+            else { //last object was operator
                 sq.add(aDice);
             }
         }
@@ -56,7 +57,7 @@ public class Sequence {
                 sq.add("+");//addNum operator
                 sq.add(num); //addNum it
             }
-            else //operand
+            else //operator
                 sq.add(num);
         }
     }
@@ -69,6 +70,7 @@ public class Sequence {
         }
     }
 
+    @Override
     public String toString(){
         String str = "";
 
@@ -78,18 +80,20 @@ public class Sequence {
         return str;
     }
 
+    //clear the sequence (not re-rolled)
     public void clear(){
         sq.clear();
         lastSequence = "";
         lastTotal = 0;
     }
 
+    //reroll the entire sequence, redoing totals and store the dice results in lastSequence
     public void reRoll() {
         String operation = "+";
         lastTotal = 0;
         lastSequence = "";
 
-
+        //each object in the sequence
         for (int i = 0; i < sq.size(); i++) {
             if (sq.get(i).getClass() == Integer.class) { //number
                 if (operation == "+"){
@@ -105,7 +109,7 @@ public class Sequence {
                     lastSequence += Integer.valueOf((Integer) sq.get(i));
                 }
             }
-            else if (sq.get(i).getClass() == Dice.class) {
+            else if (sq.get(i).getClass() == Dice.class) { //Dice
                 if (operation == "+") {
                     lastTotal += ((Dice) sq.get(i)).roll();
                     if (i > 0)
@@ -119,7 +123,7 @@ public class Sequence {
                     lastSequence += ((Dice) sq.get(i)).getLastRoll();
                 }
             }
-            else if (sq.get(i).getClass() == String.class) {
+            else if (sq.get(i).getClass() == String.class) { //an operator
                     operation = ((String)sq.get(i));
 
             }

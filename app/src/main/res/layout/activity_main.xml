@@ -43,6 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start|bottom"
         android:layout_margin="@dimen/fab_margin"
+        android:onClick="fabSaveOnClick"
         android:src="@drawable/ic_favorite_white_24dp" />
 
     <android.support.design.widget.FloatingActionButton
@@ -51,6 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/fab_margin"
+        android:onClick="fabClearOnClick"
         android:src="@drawable/ic_delete_white_24dp" />
 
 </android.support.design.widget.CoordinatorLayout>

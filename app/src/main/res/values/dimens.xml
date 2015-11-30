@@ -5,10 +5,10 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
 
-    <dimen name="textSizeDiceButton">25.0sp</dimen>
-    <dimen name="textSizeInputLabel">38.0sp</dimen>
-    <dimen name="textSizeNumberButton">36.0sp</dimen>
-    <dimen name="textSizeRollButton">44.0sp</dimen>
+    <dimen name="textSizeDiceButton">20.0sp</dimen>
+    <dimen name="textSizeInputLabel">30.0sp</dimen>
+    <dimen name="textSizeNumberButton">30.0sp</dimen>
+    <dimen name="textSizeRollButton">40.0sp</dimen>
     <dimen name="marginLeftRightNumberButton">50.0dip</dimen>
     <dimen name="dice_button_padding">0.0dip</dimen>
     <dimen name="marginTopButton">4.0dip</dimen>
