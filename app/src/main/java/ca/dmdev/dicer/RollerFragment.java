@@ -38,7 +38,7 @@ public class RollerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.roller_main, container, false);
+        View v = inflater.inflate(R.layout.roller_layout, container, false);
 
         txtSequence = (TextView) v.findViewById(R.id.txtSequence);
         sq = new Sequence();
@@ -68,10 +68,9 @@ public class RollerFragment extends Fragment {
         myDialog.setContentView(R.layout.roll_dilogue);
 
         TextView txtRollTotal = (TextView) myDialog.findViewById(R.id.txtRollTotal);
-        txtRollTotal.setText("Total: " + sq.lastTotal);
-
+        txtRollTotal.setText(String.valueOf(sq.lastTotal));
         TextView txtSequenceData = (TextView) myDialog.findViewById(R.id.txtSequenceData);
-        txtSequenceData.setText("Sequence: " + sq.lastSequence);
+        txtSequenceData.setText(sq.lastSequence);
 
         myDialog.show();
     }

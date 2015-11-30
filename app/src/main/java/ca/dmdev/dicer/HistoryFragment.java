@@ -33,6 +33,9 @@ public class HistoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.favourites_layout, container, false);
+
+
+
         return rootView;
     }
 }
