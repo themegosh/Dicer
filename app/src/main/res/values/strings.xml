@@ -24,4 +24,11 @@
     <string name="n0">0</string>
     <string name="plus">+</string>
     <string name="minus">-</string>
+    <string name="title_activity_save_favourite">Add Favourite</string>
+
+    <!-- Strings related to login -->
+    <string name="btn_save_favourite">Save Dice Roll</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="lblSaveTitle">Save Title:</string>
 </resources>

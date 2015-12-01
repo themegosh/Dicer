@@ -3,25 +3,47 @@
     android:layout_width="fill_parent"
     android:layout_height="80dp">
 
+
+
     <TextView
         android:id="@+id/txtRollHistoryTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="6dip"
+        android:contentDescription="TODO"
+        android:text="9999"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:width="70dp" />
+
+    <TextView
+        android:id="@+id/txtRollHistoryData"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/darker_gray"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:textSize="22dp" />
+        android:layout_height="26dip"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/txtRollHistoryTotal"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:text="Sequence Details: 1d6: (6) + 10"
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/txtRollHistorySequence"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/darker_gray"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:textSize="22dp" />
+        android:layout_above="@id/txtRollHistoryData"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_toRightOf="@id/txtRollHistoryTotal"
+        android:gravity="center_vertical"
+        android:text="Sequence: 1d6 + 10"
+        android:textSize="20sp" />
+
+
 
 
 </RelativeLayout>

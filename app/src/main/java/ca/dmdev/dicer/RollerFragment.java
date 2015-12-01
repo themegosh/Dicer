@@ -1,14 +1,15 @@
 package ca.dmdev.dicer;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by Doug on 2015-11-29.
@@ -69,18 +70,22 @@ public class RollerFragment extends Fragment {
         myDialog.setContentView(R.layout.roll_dilogue);
 
         TextView txtRollTotal = (TextView) myDialog.findViewById(R.id.txtRollTotal);
-        txtRollTotal.setText(String.valueOf(sq.getLastTotal()));
+        txtRollTotal.setText(String.valueOf(sq.getTotal()));
         TextView txtSequenceData = (TextView) myDialog.findViewById(R.id.txtSequenceData);
-        txtSequenceData.setText(sq.getLastSequence());
-        ((MainActivity) getActivity()).addSequenceToHistory(sq); //add sequence to history
+        txtSequenceData.setText(sq.getSequenceData());
+        ((MainActivity) getActivity()).addSequenceToHistory(sq.clone()); //add sequence to history
         myDialog.show();
     }
     public void fabClearOnClick(View v) {
         sq.clear();
         txtSequence.setText(sq.toString());
+
+        Toast.makeText(getActivity().getApplicationContext(), "Dice sequence cleared.",
+                Toast.LENGTH_LONG).show();
     }
     public void fabSaveOnClick(View v) {
-        sq.clear();
-        txtSequence.setText(sq.toString());
+        Intent myIntent = new Intent(getActivity(), SaveFavourite.class);
+        myIntent.putExtra("Sequence", sq);
+        startActivityForResult(myIntent, 0);
     }
 }

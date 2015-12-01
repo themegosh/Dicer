@@ -1,21 +1,14 @@
 package ca.dmdev.dicer;
 
-import android.app.Dialog;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,10 +21,10 @@ public class MainActivity extends AppCompatActivity {
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
     private int currentTabIndex;
-    private SequenceHistory sequenceHistory;
+    private ArrayList<Sequence> sequenceHistory;
 
     public MainActivity(){
-        sequenceHistory = new SequenceHistory();
+        sequenceHistory = new ArrayList<>();
     }
 
     @Override
@@ -64,11 +57,6 @@ public class MainActivity extends AppCompatActivity {
                     currentTabIndex = POSITION_FAVOURITE;
                     fabClear.hide();
                     fabSave.hide();
-                    Log.d("Dicer:", "SequenceHistory: ----BEGIN DUMP----");
-                    for (int i = 0; i < sequenceHistory.size(); i++){
-                        Log.d("Dicer:", "SequenceHistory: sequenceHistory.get(" + i + "): " + sequenceHistory.getStr(i));
-                    }
-                    Log.d("Dicer:", "SequenceHistory: ----END DUMP----");
                 } else {
                     currentTabIndex = POSITION_HISTORY;
                     fabClear.show(); //show only clear all history button
@@ -104,10 +92,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addSequenceToHistory(Sequence sq) {
-        sequenceHistory.addSequence(sq);
-        //TODO: update sequence history in tab
+        sequenceHistory.add(sq);
+        Log.d("Dicer:", "----BEGIN SEQUENCE DUMP----");
+        for (int i = 0; i < sequenceHistory.size(); i++){
+            Log.d("Dicer:", "sequenceHistory.get("+i+").getSq().toString():" + sequenceHistory.get(i).getSq().toString() + " sequenceHistory.get(i).toString(): " + sequenceHistory.get(i).toString());
+        }
+        Log.d("Dicer:", "----END SEQUENCE DUMP----");
     }
-    public SequenceHistory getSequenceHistory(){
+    public ArrayList<Sequence> getSequenceHistory(){
         return sequenceHistory;
     }
 

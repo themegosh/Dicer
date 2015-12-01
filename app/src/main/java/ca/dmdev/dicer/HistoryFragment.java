@@ -8,17 +8,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 /**
  * Created by Doug on 2015-11-29.
  */
 public class HistoryFragment extends Fragment {
 
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
-    private SequenceHistory sequenceHistory;
+    private ListView historyView;
+    private ArrayList<Sequence> sequenceHistory;
 
     public HistoryFragment() {
     }
@@ -36,21 +37,10 @@ public class HistoryFragment extends Fragment {
         View v = inflater.inflate(R.layout.history_fragment, container, false);
 
         sequenceHistory = ((MainActivity) getActivity()).getSequenceHistory(); //add sequence to history
-        Log.d("Dicer: ", "History, sequenceHistory: " + sequenceHistory.size());
+        historyView = (ListView) v.findViewById(R.id.historyView);
+        HistoryAdapter adapter = new HistoryAdapter(getActivity(), sequenceHistory);
+        historyView.setAdapter(adapter);
 
-        mRecyclerView = (RecyclerView) v.findViewById(R.id.historyRecycler);
-
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        mRecyclerView.setHasFixedSize(true);
-
-        // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
-        // specify an adapter (see also next example)
-        mAdapter = new HistoryAdapter(sequenceHistory);
-        mRecyclerView.setAdapter(mAdapter);
         return v;
     }
 

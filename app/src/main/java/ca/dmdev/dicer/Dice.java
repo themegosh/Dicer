@@ -2,12 +2,13 @@ package ca.dmdev.dicer;
 
 import android.util.Log;
 
+import java.io.Serializable;
 import java.util.Random;
 
 /**
  * Created by mathe_000 on 2015-11-28.
  */
-public class Dice {
+public class Dice implements Cloneable, Serializable {
     private int sides;
     private int count;
     private String lastRoll = "";
@@ -68,6 +69,16 @@ public class Dice {
 
     public int getSides() {
         return sides;
+    }
+
+    @Override
+    public Dice clone() {
+        try {
+            return (Dice)super.clone();
+        }
+        catch (Exception e) {
+            return null;
+        }
     }
 
 }

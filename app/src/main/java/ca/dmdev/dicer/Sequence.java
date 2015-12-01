@@ -2,19 +2,26 @@ package ca.dmdev.dicer;
 
 import android.util.Log;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by mathe_000 on 2015-11-28.
  */
-public class Sequence {
-    ArrayList<Object> sq; //this is the object array of dice, numbers and operators, store sequentially
-    private String lastSequence = "";
+public class Sequence implements Serializable {
+    private ArrayList<Object> sq; //this is the object array of dice, numbers and operators, store sequentially
+    private String sequenceData = "";
     private int lastTotal;
 
     //constructor
     public Sequence(){
         sq = new ArrayList<>();
+    }
+
+    public Sequence(ArrayList<Object> sq, String sequenceData, int lastTotal) {
+        this.sq = sq;
+        this.sequenceData = sequenceData;
+        this.lastTotal = lastTotal;
     }
 
     public void addDice(Dice aDice) {
@@ -70,58 +77,52 @@ public class Sequence {
         }
     }
 
-    @Override
-    public String toString(){
-        String str = "";
-
-        for (int i = 0; i < sq.size(); i++)
-            str += sq.get(i).toString();
-
-        return str;
-    }
-
     //clear the sequence (not re-rolled)
     public void clear(){
         sq.clear();
-        lastSequence = "";
+        sequenceData = "";
         lastTotal = 0;
     }
 
-    //reroll the entire sequence, redoing totals and store the dice results in lastSequence
+    //reroll the entire sequence, redoing totals and store the dice results in lastSequenceData
     public void reRoll() {
         String operation = "+";
         lastTotal = 0;
-        lastSequence = "";
+        sequenceData = "";
 
         //each object in the sequence
         for (int i = 0; i < sq.size(); i++) {
             if (sq.get(i).getClass() == Integer.class) { //number
-                if (operation == "+"){
+                if (operation.equalsIgnoreCase("+")){
                     lastTotal += (Integer) sq.get(i);
                     if (i > 0)
-                        lastSequence += " + ";
-                    lastSequence += Integer.valueOf((Integer) sq.get(i));
+                        sequenceData += " + ";
+                    sequenceData += Integer.valueOf((Integer) sq.get(i));
                 }
-                else {
+                else if (operation.equalsIgnoreCase("-")){
                     lastTotal -= (Integer) sq.get(i);
                     if (i > 0)
-                        lastSequence += " - ";
-                    lastSequence += Integer.valueOf((Integer) sq.get(i));
+                        sequenceData += " - ";
+                    sequenceData += Integer.valueOf((Integer) sq.get(i));
                 }
+                else
+                    Log.d("Dicer CRITCAL ERRROR: ", "reRoll operation is NOT \"+\" or \"-\"... operation: " + operation); //this will probably crash
             }
             else if (sq.get(i).getClass() == Dice.class) { //Dice
-                if (operation == "+") {
+                if (operation.equalsIgnoreCase("+")) {
                     lastTotal += ((Dice) sq.get(i)).roll();
                     if (i > 0)
-                        lastSequence += " + ";
-                    lastSequence += ((Dice) sq.get(i)).getLastRoll();
+                        sequenceData += " + ";
+                    sequenceData += ((Dice) sq.get(i)).getLastRoll();
                 }
-                else {
+                else if (operation.equalsIgnoreCase("-")){
                     lastTotal -= ((Dice) sq.get(i)).roll();
                     if (i > 0)
-                        lastSequence += " - ";
-                    lastSequence += ((Dice) sq.get(i)).getLastRoll();
+                        sequenceData += " - ";
+                    sequenceData += ((Dice) sq.get(i)).getLastRoll();
                 }
+                else
+                Log.d("Dicer CRITCAL ERRROR: ", "reRoll operation is NOT \"+\" or \"-\"... operation: " + operation); //this will probably crash
             }
             else if (sq.get(i).getClass() == String.class) { //an operator
                     operation = ((String)sq.get(i));
@@ -130,14 +131,42 @@ public class Sequence {
             else
                 Log.d("Dicer CRITCAL ERRROR: ", "reRoll sq.get(i) resulted in non-operator, non-number, non-int, non-dice"); //this will probably crash
         }
+
+        Log.d("Dicer: ", "reRoll last sequence: " + sequenceData); //this will probably crash
     }
 
-    public int getLastTotal(){
+    public int getTotal() {
         return lastTotal;
     }
 
-    public String getLastSequence() {
-        return lastSequence;
+    public String getSequenceData() {
+        return sequenceData;
     }
 
+    @Override
+    public String toString(){
+        String str = "";
+
+        for (int i = 0; i < sq.size(); i++)
+            str += sq.get(i).toString() + " ";
+
+        return str;
+    }
+
+    public ArrayList<Object> getSq() {
+        return sq;
+    }
+
+    public Sequence clone() {
+        ArrayList<Object> clone = new ArrayList<Object>();
+        for(Object item: sq){
+            if (item.getClass() == Dice.class)
+                clone.add(((Dice)item).clone());
+            else if (item.getClass() == String.class)
+                clone.add(item);
+            else if (item.getClass() == Integer.class)
+                clone.add(item);
+        }
+        return new Sequence(clone, sequenceData, lastTotal);
+    }
 }
