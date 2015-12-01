@@ -3,6 +3,7 @@ package ca.dmdev.dicer;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
@@ -21,6 +22,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -90,9 +92,50 @@ public class SaveFavourite extends ActionBarActivity {
     }
 
     private void saveFav(){
-        Intent intent = new Intent();
-        setResult(RESULT_OK, intent);
-        finish();
+        //verify input
+        if (txtTitle.getText().toString().length() <= 0){
+            txtTitle.setError(getString(R.string.error_field_required));
+            txtTitle.requestFocus();
+        }
+        else { //valid input
+            Intent intent = new Intent();
+            setResult(RESULT_OK, intent);
+            intent.putExtra("Sequence", sq);
+            intent.putExtra("Title", txtTitle.getText().toString());
+            finish();
+        }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (event.getAction() == KeyEvent.ACTION_DOWN) {
+            switch (keyCode) {
+                case KeyEvent.KEYCODE_BACK:
+
+                    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch (which){
+                                case DialogInterface.BUTTON_POSITIVE:
+                                    finish();
+                                    break;
+
+                                case DialogInterface.BUTTON_NEGATIVE:
+                                    //No button clicked
+                                    break;
+                            }
+                        }
+                    };
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setMessage(getText(R.string.confirm_discard_unsaved)).setPositiveButton("Yes", dialogClickListener)
+                            .setNegativeButton("No", dialogClickListener).show();
+
+                    return true;
+            }
+
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
 

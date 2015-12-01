@@ -31,4 +31,5 @@
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="lblSaveTitle">Save Title:</string>
+    <string name="confirm_discard_unsaved">Discard unsaved favourite?</string>
 </resources>

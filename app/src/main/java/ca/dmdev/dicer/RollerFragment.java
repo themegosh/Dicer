@@ -1,5 +1,6 @@
 package ca.dmdev.dicer;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -87,5 +88,27 @@ public class RollerFragment extends Fragment {
         Intent myIntent = new Intent(getActivity(), SaveFavourite.class);
         myIntent.putExtra("Sequence", sq);
         startActivityForResult(myIntent, 0);
+
+
+
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check which request we're responding to
+        //if (requestCode == PICK_CONTACT_REQUEST) {
+            // Make sure the request was successful
+            if (resultCode == Activity.RESULT_OK) {
+
+                sq = (Sequence)data.getSerializableExtra("Sequence");
+                String saveTitle = data.getStringExtra("Title");
+
+                //todo save to favourites tab
+
+                Toast.makeText(getActivity().getApplicationContext(), "Dice sequence saved.",
+                        Toast.LENGTH_LONG).show();
+            }
+        //}
     }
 }
