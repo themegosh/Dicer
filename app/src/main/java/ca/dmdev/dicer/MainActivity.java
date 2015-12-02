@@ -22,9 +22,11 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private int currentTabIndex;
     private ArrayList<Sequence> sequenceHistory;
+    private ArrayList<FavouriteSequence> sequenceFavourites;
 
     public MainActivity(){
         sequenceHistory = new ArrayList<>();
+        sequenceFavourites = new ArrayList<>();
     }
 
     @Override
@@ -82,7 +84,8 @@ public class MainActivity extends AppCompatActivity {
             mSectionsPagerAdapter.rollerFragment.fabClearOnClick(v);
         }
         else if (currentTabIndex == POSITION_HISTORY) { //clear the history listview
-
+            sequenceHistory.clear();
+            mSectionsPagerAdapter.historyFragment.refreshList();
         }
     }
     public void fabSaveOnClick(View v) {
@@ -92,15 +95,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addSequenceToHistory(Sequence sq) {
-        sequenceHistory.add(sq);
-        Log.d("Dicer:", "----BEGIN SEQUENCE DUMP----");
-        for (int i = 0; i < sequenceHistory.size(); i++){
-            Log.d("Dicer:", "sequenceHistory.get("+i+").getSq().toString():" + sequenceHistory.get(i).getSq().toString() + " sequenceHistory.get(i).toString(): " + sequenceHistory.get(i).toString());
-        }
-        Log.d("Dicer:", "----END SEQUENCE DUMP----");
+        sequenceHistory.add(0, sq);
+    }
+    public void addSequenceToFavourites(Sequence sq, String title){
+        sequenceFavourites.add(0, new FavouriteSequence(sq, title));
     }
     public ArrayList<Sequence> getSequenceHistory(){
         return sequenceHistory;
+    }
+    public ArrayList<FavouriteSequence> getSequenceFavourites(){
+        return sequenceFavourites;
     }
 
 }

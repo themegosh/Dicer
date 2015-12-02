@@ -43,14 +43,10 @@ public class HistoryAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater=activity.getLayoutInflater();
-
-        if(convertView == null){
-            convertView=inflater.inflate(R.layout.history_row_layout, parent, false);
-
-            txtHistoryTotal=(TextView) convertView.findViewById(R.id.txtRollHistoryTotal);
-            txtHistorySequence=(TextView) convertView.findViewById(R.id.txtRollHistorySequence);
-            txtHistoryData=(TextView) convertView.findViewById(R.id.txtRollHistoryData);
-        }
+        convertView=inflater.inflate(R.layout.history_row_layout, parent, false);
+        txtHistoryTotal=(TextView) convertView.findViewById(R.id.txtFavRollTotal);
+        txtHistorySequence=(TextView) convertView.findViewById(R.id.txtRollHistorySequence);
+        txtHistoryData=(TextView) convertView.findViewById(R.id.txtRollHistoryData);
 
         txtHistoryTotal.setText(String.valueOf(mDataset.get(position).getTotal()));
         txtHistorySequence.setText(mDataset.get(position).toString());

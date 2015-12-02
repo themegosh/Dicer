@@ -8,8 +8,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -20,6 +22,7 @@ public class HistoryFragment extends Fragment {
 
     private ListView historyView;
     private ArrayList<Sequence> sequenceHistory;
+    private HistoryAdapter adapter;
 
     public HistoryFragment() {
     }
@@ -38,11 +41,14 @@ public class HistoryFragment extends Fragment {
 
         sequenceHistory = ((MainActivity) getActivity()).getSequenceHistory(); //add sequence to history
         historyView = (ListView) v.findViewById(R.id.historyView);
-        HistoryAdapter adapter = new HistoryAdapter(getActivity(), sequenceHistory);
+        adapter = new HistoryAdapter(getActivity(), sequenceHistory);
         historyView.setAdapter(adapter);
 
         return v;
     }
 
+    public void refreshList(){
+        adapter.notifyDataSetChanged();
+    }
 
 }

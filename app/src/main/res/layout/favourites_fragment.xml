@@ -5,11 +5,13 @@
     android:padding="6dip"
     tools:context=".MainActivity$FavouritesFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Favourites"
-        android:id="@+id/testTextFav" />
+    <ListView
+        android:id="@+id/favouritesView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" >
+    </ListView>
 
 
 </LinearLayout >

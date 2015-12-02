@@ -39,14 +39,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/lblSaveTitle"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:textColor="@android:color/black" />
                 <EditText
                     android:id="@+id/txtTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
-                    android:singleLine="true" />
-
+                    android:singleLine="true"
+                    android:textColor="@android:color/black" />
+                <TextView
+                    android:id="@+id/lblSequence"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lblDiceSequence"
+                    android:singleLine="true"
+                    android:textColor="@android:color/black" />
                 <EditText
                     android:id="@+id/txtSequence"
                     android:layout_width="match_parent"
@@ -54,7 +62,8 @@
                     android:maxLines="1"
                     android:singleLine="true"
                     android:enabled="false"
-                    android:focusable="true" />
+                    android:focusable="true"
+                    android:textColor="@android:color/black" />
 
                 <Button
                     android:id="@+id/favourites_save_button"
@@ -63,7 +72,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="@string/btn_save_favourite"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="#424242" />
 
             </LinearLayout>
         </ScrollView>

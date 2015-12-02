@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,7 +47,22 @@ public class RollerFragment extends Fragment {
         txtSequence = (TextView) v.findViewById(R.id.txtSequence);
         sq = new Sequence();
 
+        ImageButton btnSaveRoll = (ImageButton) v.findViewById(R.id.btnDelete);
+        btnSaveRoll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnDelete(view);
+            }
+        });
+
         return v;
+    }
+
+    public void btnDelete(View view) {
+        if (sq.count() > 0) {
+            sq.deleteLastAction();
+            txtSequence.setText(sq.toString());
+        }
     }
 
     public void btnDiceOnClick(View view) {
@@ -85,13 +101,15 @@ public class RollerFragment extends Fragment {
                 Toast.LENGTH_LONG).show();
     }
     public void fabSaveOnClick(View v) {
-        Intent myIntent = new Intent(getActivity(), SaveFavourite.class);
-        myIntent.putExtra("Sequence", sq);
-        startActivityForResult(myIntent, 0);
-
-
-
-
+        if (txtSequence.getText().toString().isEmpty()){
+            Toast.makeText(getActivity().getApplicationContext(), "You must enter a sequence before saving.",
+                    Toast.LENGTH_LONG).show();
+        }
+        else {
+            Intent myIntent = new Intent(getActivity(), SaveFavourite.class);
+            myIntent.putExtra("Sequence", sq);
+            startActivityForResult(myIntent, 0);
+        }
     }
 
     @Override
@@ -102,8 +120,9 @@ public class RollerFragment extends Fragment {
             if (resultCode == Activity.RESULT_OK) {
 
                 sq = (Sequence)data.getSerializableExtra("Sequence");
-                String saveTitle = data.getStringExtra("Title");
+                String title = data.getStringExtra("Title");
 
+                ((MainActivity)getActivity()).addSequenceToFavourites(sq, title);
                 //todo save to favourites tab
 
                 Toast.makeText(getActivity().getApplicationContext(), "Dice sequence saved.",

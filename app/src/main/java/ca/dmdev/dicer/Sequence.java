@@ -169,4 +169,12 @@ public class Sequence implements Serializable {
         }
         return new Sequence(clone, sequenceData, lastTotal);
     }
+
+    public void deleteLastAction(){
+        sq.remove(sq.size() - 1);
+    }
+
+    public int count(){
+        return sq.size();
+    }
 }
