@@ -1,10 +1,14 @@
 package ca.dmdev.dicer;
 
 import android.app.Activity;
+import android.util.Log;
 import android.widget.BaseAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -41,7 +45,7 @@ public class HistoryAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater=activity.getLayoutInflater();
         convertView=inflater.inflate(R.layout.history_row_layout, parent, false);
         txtHistoryTotal=(TextView) convertView.findViewById(R.id.txtFavRollTotal);
@@ -51,6 +55,13 @@ public class HistoryAdapter extends BaseAdapter {
         txtHistoryTotal.setText(String.valueOf(mDataset.get(position).getTotal()));
         txtHistorySequence.setText(mDataset.get(position).toString());
         txtHistoryData.setText(mDataset.get(position).getSequenceData());
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                mDataset.get(position).reRollShowPopup(v);
+                notifyDataSetChanged();
+            }
+        });
 
         return convertView;
     }

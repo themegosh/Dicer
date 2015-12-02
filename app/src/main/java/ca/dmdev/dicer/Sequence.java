@@ -1,6 +1,10 @@
 package ca.dmdev.dicer;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -133,6 +137,19 @@ public class Sequence implements Serializable {
         }
 
         Log.d("Dicer: ", "reRoll last sequence: " + sequenceData); //this will probably crash
+    }
+
+    public void reRollShowPopup(View v){
+        reRoll();
+        Dialog myDialog = new Dialog(v.getContext(), R.style.CustomDialogTheme);
+        myDialog.setContentView(R.layout.roll_dilogue);
+
+        TextView txtRollTotal = (TextView) myDialog.findViewById(R.id.txtRollTotal);
+        TextView txtSequenceData = (TextView) myDialog.findViewById(R.id.txtSequenceData);
+
+        txtRollTotal.setText(String.valueOf(lastTotal));
+        txtSequenceData.setText(sequenceData);
+        myDialog.show();
     }
 
     public int getTotal() {

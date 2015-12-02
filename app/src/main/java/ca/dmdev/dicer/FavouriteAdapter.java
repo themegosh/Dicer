@@ -52,7 +52,7 @@ public class FavouriteAdapter extends BaseAdapter{
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater=activity.getLayoutInflater();
         convertView=inflater.inflate(R.layout.favourites_row_layout, parent, false);
         txtFavRollTotal=(TextView) convertView.findViewById(R.id.txtFavRollTotal);
@@ -67,6 +67,12 @@ public class FavouriteAdapter extends BaseAdapter{
         txtFavSequence.setText(mDataset.get(position).toString());
         txtFavSequenceData.setText(mDataset.get(position).getSequenceData());
 
+        convertView.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                mDataset.get(position).reRollShowPopup(v);
+                notifyDataSetChanged();
+            }
+        });
 
         btnFavExpander.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

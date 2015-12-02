@@ -81,17 +81,8 @@ public class RollerFragment extends Fragment {
         txtSequence.setText(sq.toString());
     }
     public void btnRollOnClick(View v) {
-        sq.reRoll();
-
-        Dialog myDialog = new Dialog(v.getContext(), R.style.CustomDialogTheme);
-        myDialog.setContentView(R.layout.roll_dilogue);
-
-        TextView txtRollTotal = (TextView) myDialog.findViewById(R.id.txtRollTotal);
-        txtRollTotal.setText(String.valueOf(sq.getTotal()));
-        TextView txtSequenceData = (TextView) myDialog.findViewById(R.id.txtSequenceData);
-        txtSequenceData.setText(sq.getSequenceData());
+        sq.reRollShowPopup(v);
         ((MainActivity) getActivity()).addSequenceToHistory(sq.clone()); //add sequence to history
-        myDialog.show();
     }
     public void fabClearOnClick(View v) {
         sq.clear();
