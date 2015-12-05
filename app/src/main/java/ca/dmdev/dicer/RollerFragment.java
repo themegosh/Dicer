@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +26,6 @@ public class RollerFragment extends Fragment {
     private Sequence sq;
 
     public RollerFragment() {
-        Log.d("Dicer: ", "RollerFragment.constructor() called!");
     }
 
     /**
@@ -35,7 +33,6 @@ public class RollerFragment extends Fragment {
      * number.
      */
     public static RollerFragment newInstance() {
-        Log.d("Dicer: ", "RollerFragment.newInstance() called!");
         RollerFragment fragment = new RollerFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
@@ -46,13 +43,9 @@ public class RollerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.roller_fragment, container, false);
-        setRetainInstance(true);
-        Log.d("Dicer: ", "RollerFragment.onCreateView() called!");
 
         txtSequence = (TextView) v.findViewById(R.id.txtSequence);
-
-        if (sq != null)
-            sq = new Sequence();
+        sq = new Sequence();
 
         ImageButton btnSaveRoll = (ImageButton) v.findViewById(R.id.btnDelete);
         btnSaveRoll.setOnClickListener(new View.OnClickListener() {

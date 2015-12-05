@@ -34,19 +34,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*if (savedInstanceState == null) {
-            RollerFragment test = new RollerFragment();
-            test.setArguments(getIntent().getExtras());
-            getSupportFragmentManager().beginTransaction().replace(android.R.id.content, test, "your_fragment_tag").commit();
-        } else {
-            TestFragment test = (TestFragment) getSupportFragmentManager().findFragmentByTag("your_fragment_tag");
-        }*/
-
         // Create the adapter that will return a fragment for each tab
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
-
         mViewPager.setAdapter(mSectionsPagerAdapter);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
@@ -82,9 +73,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //roll fragment buttons onClick triggers to fragment functions
-    public void btnDiceOnClick(View v) {
-        mSectionsPagerAdapter.rollerFragment.btnDiceOnClick(v);
-    }
+    public void btnDiceOnClick(View v) { mSectionsPagerAdapter.rollerFragment.btnDiceOnClick(v); }
     public void btnNumOnClick(View v) { mSectionsPagerAdapter.rollerFragment.btnNumOnClick(v); }
     public void btnOperandOnClick(View v) { mSectionsPagerAdapter.rollerFragment.btnOperandOnClick(v); }
     public void btnRollOnClick(View v) { mSectionsPagerAdapter.rollerFragment.btnRollOnClick(v); }
