@@ -1,5 +1,7 @@
 package ca.dmdev.dicer;
 
+import java.util.ArrayList;
+
 /**
  * Created by mathe_000 on 2015-12-01.
  */
@@ -11,14 +13,9 @@ public class FavouriteSequence extends Sequence {
         super();
     }
 
-    public FavouriteSequence(String title){
-        super();
-        this.title = title;
-    }
-
     public FavouriteSequence(Sequence sq, String title){
-        super(sq.clone().getSq(), sq.getSequenceData(), sq.getTotal());
-        this.title = title;
+        super(sq.clone().getSq(), sq.getSequenceData(), sq.getTotal(), sq.getId());
+        this.title = title.trim();
     }
 
     public String getTitle(){
@@ -26,7 +23,12 @@ public class FavouriteSequence extends Sequence {
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        this.title = title.trim();
+    }
+
+    public FavouriteSequence clone() {
+        Sequence temp = super.clone();
+        return new FavouriteSequence(temp, title);
     }
 
 

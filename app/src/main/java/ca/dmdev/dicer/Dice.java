@@ -13,28 +13,9 @@ public class Dice implements Cloneable, Serializable {
     private int count;
     private String lastRoll = "";
 
-    public Dice(int sides, int count){
+    public Dice(int count, int sides){
         this.sides = sides;
         this.count = count;
-    }
-
-    public Dice (int sides){
-        this.sides = sides;
-        this.count = 1;
-    }
-
-    public Dice (String dStr){
-        String strNums = "";
-        boolean foundD = false;
-        for (int i = 0; i < dStr.length(); i++){
-            if (foundD)
-                strNums += dStr.charAt(i);
-            if (dStr.charAt(i) == 'd')
-                foundD = true;
-
-        }
-        this.sides = Integer.parseInt(strNums);
-        this.count = 1;
     }
 
     public void addCount(int by){
@@ -52,7 +33,7 @@ public class Dice implements Cloneable, Serializable {
             total += curRoll;
             lastRoll += String.valueOf(curRoll);
             if (i != (count - 1))
-                lastRoll += ", ";
+                lastRoll += " + ";
         }
         lastRoll += ") ";
 

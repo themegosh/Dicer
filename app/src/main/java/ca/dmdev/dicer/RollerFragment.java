@@ -3,15 +3,20 @@ package ca.dmdev.dicer;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 /**
  * Created by Doug on 2015-11-29.
@@ -22,8 +27,9 @@ public class RollerFragment extends Fragment {
      * fragment.
      */
 
-    private TextView txtSequence;
+    TextView txtSequence;
     private Sequence sq;
+    static final String SEQUENCE = "R_SEQUECE";
 
     public RollerFragment() {
     }
@@ -42,41 +48,65 @@ public class RollerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.roller_fragment, container, false);
+        //View v = inflater.inflate(R.layout.roller_fragment, container, false);
+
+        FrameLayout v = new FrameLayout(getActivity());
+        sq = new Sequence();
+        if (savedInstanceState != null && savedInstanceState.getStringArrayList(SEQUENCE) != null){
+            for (int i = 0; i < savedInstanceState.getStringArrayList(SEQUENCE).size(); i++){
+                sq.addAction(savedInstanceState.getStringArrayList(SEQUENCE).get(i));
+            }
+            txtSequence.setText(sq.toString());
+        }
+        populateViewForOrientation(inflater, v);
+
 
         txtSequence = (TextView) v.findViewById(R.id.txtSequence);
-        sq = new Sequence();
 
-        ImageButton btnSaveRoll = (ImageButton) v.findViewById(R.id.btnDelete);
-        btnSaveRoll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                btnDelete(view);
-            }
-        });
 
         return v;
     }
 
-    public void btnDelete(View view) {
+
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        // Save the user's current game state
+        if (sq != null) {
+            ArrayList<String> strSq = new ArrayList<>();
+            for (int i = 0; i < sq.getSq().size(); i++) {
+                strSq.add(sq.getSq().get(i).toString());
+            }
+            savedInstanceState.putStringArrayList(SEQUENCE, strSq);
+        }
+
+        // Always call the superclass so it can save the view hierarchy state
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        LayoutInflater inflater = LayoutInflater.from(getActivity());
+        populateViewForOrientation(inflater, (ViewGroup) getView());
+    }
+
+    private void populateViewForOrientation(LayoutInflater inflater, ViewGroup viewGroup) {
+        viewGroup.removeAllViewsInLayout();
+        View subview = inflater.inflate(R.layout.roller_fragment, viewGroup);
+        txtSequence = (TextView) subview.findViewById(R.id.txtSequence);
+        txtSequence.setText(sq.toString());
+        // Find your buttons in subview, set up onclicks, set up callbacks to your parent fragment or activity here.
+    }
+
+    public void btnDeleteOnClick(View view){
         if (sq.count() > 0) {
             sq.deleteLastAction();
             txtSequence.setText(sq.toString());
         }
     }
-
-    public void btnDiceOnClick(View view) {
+    public void btnActionOnClick(View view) {
         Button b = (Button)view;
-        sq.addDice(new Dice(b.getText().toString()));
-        txtSequence.setText(sq.toString());
-    }
-    public void btnNumOnClick(View v) {
-        Button b = (Button)v;
-        sq.addNum(Integer.parseInt(b.getText().toString()));
-        txtSequence.setText(sq.toString());
-    }
-    public void btnOperandOnClick(View v) {
-        Button b = (Button)v;
         sq.addAction(b.getText().toString());
         txtSequence.setText(sq.toString());
     }
@@ -113,8 +143,8 @@ public class RollerFragment extends Fragment {
                 sq = (Sequence)data.getSerializableExtra("Sequence");
                 String title = data.getStringExtra("Title");
 
+                //save to favourites tab
                 ((MainActivity)getActivity()).addSequenceToFavourites(sq, title);
-                //todo save to favourites tab
 
                 Toast.makeText(getActivity().getApplicationContext(), "Dice sequence saved.",
                         Toast.LENGTH_LONG).show();

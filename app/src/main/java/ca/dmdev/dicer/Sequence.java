@@ -13,70 +13,87 @@ import java.util.ArrayList;
  * Created by mathe_000 on 2015-11-28.
  */
 public class Sequence implements Serializable {
-    private ArrayList<Object> sq; //this is the object array of dice, numbers and operators, store sequentially
-    private String sequenceData = "";
-    private int lastTotal;
+    protected ArrayList<Object> sq; //this is the object array of dice, numbers and operators, store sequentially
+    protected String sequenceData = "";
+    protected int lastTotal;
+    protected long id;
 
     //constructor
     public Sequence(){
         sq = new ArrayList<>();
     }
 
-    public Sequence(ArrayList<Object> sq, String sequenceData, int lastTotal) {
+    public Sequence(ArrayList<Object> sq, String sequenceData, int lastTotal, long id) {
         this.sq = sq;
         this.sequenceData = sequenceData;
         this.lastTotal = lastTotal;
+        this.id = id;
     }
 
-    public void addDice(Dice aDice) {
-        if (sq.size() == 0){ //nothing in sequence yet
-            sq.add(aDice);
-        }
-        else { //check if there is already a dice sequence
-            if (sq.get(sq.size() - 1).getClass() == aDice.getClass()) { //if the last object was a dice
-                Dice prev = (Dice) sq.get(sq.size() - 1); //the last dice added
-                if (prev.getSides() == aDice.getSides()) { //were working on the same dice
-                    prev.addCount(1); //increase count
-                    sq.set(sq.size() - 1, prev); //update dice object
-                }
-                else { //new dice type
-                    sq.add("+"); //addNum operator
+    //this function is where the magic happens
+    //Processing an "action" in the following forms: "+", "-", "1", "1d5"
+    //add each action to the sequence and cast the right object class
+    public void addAction(String str){
+        boolean isDice = false;
+        String firstHalf = "";
+        String secondHalf = "";
+        //determine what we have (dice, operator, or number)
+        if (str.charAt(0) == '+' || str.charAt(0) == '-'){ //handle operator processing
+            if (sq.size() > 0 && !sq.get(sq.size() - 1).toString().equalsIgnoreCase("+") && !sq.get(sq.size() - 1).toString().equalsIgnoreCase("-")) //if this isn't the first action, and the last wasnt an operator
+                sq.add(str.charAt(0)); //add it
+        } else { //either a dice or a number
+            for (int i = 0; i < str.length(); i++) { //loop through to determine what it is
+                if (str.charAt(i) == 'd') //we've got a dice
+                    isDice = true;
+                if (!isDice)
+                    firstHalf += str.charAt(i); //concat the (num of dice OR int) together
+                else
+                    if (str.charAt(i) != 'd')
+                        secondHalf += str.charAt(i);//concat the number of sides of the dice
+            }
+            if (isDice){ //handle dice processing
+                if (firstHalf == "")
+                    firstHalf = "1"; //default 1
+                Dice aDice = new Dice(Integer.valueOf(firstHalf.trim()),Integer.valueOf(secondHalf.trim()));
+                if (sq.size() == 0){ //nothing in sequence yet
                     sq.add(aDice);
                 }
+                else { //check if there is already a dice sequence
+                    if (sq.get(sq.size() - 1).getClass() == Dice.class) { //if the last object was a dice
+                        Dice prev = (Dice) sq.get(sq.size() - 1); //get the last dice added
+                        if (prev.getSides() == aDice.getSides()) { //were working on the same dice
+                            prev.addCount(1); //increase count
+                            sq.set(sq.size() - 1, prev); //update dice object
+                        }
+                        else { //new dice type
+                            sq.add("+"); //addNum operator
+                            sq.add(aDice);
+                        }
+                    }
+                    else if (sq.get(sq.size() - 1).getClass() == Integer.class){ //numbers added last
+                        aDice.addCount(((int) sq.get(sq.size() - 1)) - 1); //addNum the number to the dice count
+                        sq.set(sq.size() - 1, aDice); //update dice object
+                    }
+                    else { //last object was operator
+                        sq.add(aDice);
+                    }
+                }
             }
-            else if (sq.get(sq.size() - 1).getClass() == Integer.class){ //numbers added last
-                aDice.addCount(((int) sq.get(sq.size() - 1)) - 1); //addNum the number to the dice count
-                sq.set(sq.size() - 1, aDice); //update dice object
-            }
-            else { //last object was operator
-                sq.add(aDice);
-            }
-        }
-    }
-
-    public void addNum(int num) {
-        if (sq.size() == 0){ //nothing in sequence yet
-            sq.add(num);
-        }
-        else { //check if there is already a dice sequence
-            if (sq.get(sq.size() - 1).getClass() == Integer.class) { //if the last object is a number
-                String concatNumber = sq.get(sq.size() - 1).toString() + String.valueOf(num);
-                sq.set(sq.size() - 1, Integer.parseInt(concatNumber));
-
-            }
-            else if (sq.get(sq.size() - 1).getClass() == Dice.class){ //last object is dice
-                sq.add("+");//addNum operator
-                sq.add(num); //addNum it
-            }
-            else //operator
-                sq.add(num);
-        }
-    }
-
-    public void addAction(String action) {
-        if (sq.size() > 0) {
-            if (((String) sq.get(sq.size() - 1).toString() != "+") && ((String) sq.get(sq.size() - 1).toString() != "-")) {
-                sq.add(action);
+            else { //handle number processing
+                if (sq.size() == 0){ //nothing in sequence yet
+                    sq.add(Integer.valueOf(str)); //add it
+                }
+                else {
+                    if (sq.get(sq.size() - 1).getClass() == Integer.class) { //if the last object is a number
+                        sq.set(sq.size() - 1, Integer.parseInt(sq.get(sq.size() - 1).toString() + firstHalf.trim())); //concat and convert to int, the last number, and the current number
+                    }
+                    else if (sq.get(sq.size() - 1).getClass() == Dice.class){ //last object is dice
+                        sq.add("+"); //add an operator
+                        sq.add(Integer.valueOf(str)); //addNum it
+                    }
+                    else //operator
+                        sq.add(Integer.valueOf(str));
+                }
             }
         }
     }
@@ -135,8 +152,6 @@ public class Sequence implements Serializable {
             else
                 Log.d("Dicer CRITCAL ERRROR: ", "reRoll sq.get(i) resulted in non-operator, non-number, non-int, non-dice"); //this will probably crash
         }
-
-        Log.d("Dicer: ", "reRoll last sequence: " + sequenceData); //this will probably crash
     }
 
     public void reRollShowPopup(View v){
@@ -184,7 +199,7 @@ public class Sequence implements Serializable {
             else if (item.getClass() == Integer.class)
                 clone.add(item);
         }
-        return new Sequence(clone, sequenceData, lastTotal);
+        return new Sequence(clone, sequenceData, lastTotal, id);
     }
 
     public void deleteLastAction(){
@@ -194,4 +209,26 @@ public class Sequence implements Serializable {
     public int count(){
         return sq.size();
     }
+
+    public void setSq(ArrayList<Object> newSq){
+        sq = newSq;
+    }
+
+    public void setSequenceData(String newSequenceData) {
+        sequenceData = newSequenceData;
+    }
+
+    public void setLastTotal (int newLastTotal) {
+        lastTotal = newLastTotal;
+    }
+
+    public void setId(long newId){
+        id = newId;
+    }
+
+    public long getId(){
+        return id;
+    }
+
+
 }

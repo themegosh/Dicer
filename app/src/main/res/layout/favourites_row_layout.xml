@@ -16,7 +16,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginRight="6dip"
             android:contentDescription="TODO"
-            android:text="9999"
+            android:text="152"
             android:gravity="center"
             android:textSize="25sp"
             android:width="70dp"
@@ -31,7 +31,7 @@
             android:layout_alignParentTop="false"
             android:layout_alignWithParentIfMissing="false"
             android:text="An example Title"
-            android:textSize="20sp"
+            android:textSize="25sp"
             android:textColor="@android:color/primary_text_light"
             android:layout_alignParentStart="false"
             android:layout_toRightOf="@+id/txtFavRollTotal"
@@ -65,18 +65,33 @@
         android:paddingBottom="5dp"
         android:id="@+id/layoutHiddenSequence">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
-            android:id="@+id/txtFavSequence" />
+        <ImageButton
+            android:id="@+id/btnDeleteFav"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:width="70dp"
+            android:src="@android:drawable/ic_delete"
+            android:layout_alignParentEnd="false"
+            android:layout_alignParentRight="true"
+            android:background="@android:color/transparent"
+            android:minWidth="50dp" />
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:text="New Text"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="12d20"
+            android:id="@+id/txtFavSequence"
+            android:layout_toStartOf="@id/btnDeleteFav" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="12d20 ( 19 + 10 + 5 + 7 + 9 + 15 + 10 + 20 + 14 + 19 + 17 + 7 )"
             android:id="@+id/txtFavSequenceData"
-            android:layout_below="@+id/txtFavSequence" />
+            android:layout_below="@+id/txtFavSequence"
+            android:layout_toStartOf="@id/btnDeleteFav" />
+
+
     </RelativeLayout>
 </LinearLayout>

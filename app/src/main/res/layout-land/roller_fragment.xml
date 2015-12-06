@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+    android:orientation="vertical" 
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:textSize="@dimen/textSizeInputLabel" android:ellipsize="none" android:gravity="right" android:id="@+id/txtSequence" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" android:layout_marginBottom="4.0dip" android:text="" android:layout_weight="10.0" />
+        <ImageButton android:id="@+id/btnDelete" android:background="@android:color/transparent" android:layout_width="64.0dip" android:layout_height="fill_parent" android:layout_marginTop="4.0dip" android:layout_marginBottom="4.0dip" android:src="@drawable/ic_arrow_back_black" />
+    </LinearLayout>
+    <TableLayout android:layout_width="fill_parent" android:layout_height="fill_parent" android:weightSum="14.0">
+        <TableRow android:layout_width="fill_parent" android:layout_height="0.0dip" android:weightSum="4.0" android:layout_weight="3.0">
+            <Button android:onClick="btnActionOnClick" android:textSize="@dimen/textSizeDiceButton" android:id="@id/buttonD100" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_margin="@dimen/dice_button_padding" android:text="@string/d100" android:layout_weight="1.0" android:textAllCaps="false" />
+            <Button android:onClick="btnActionOnClick" android:textSize="@dimen/textSizeDiceButton" android:id="@id/buttonD20" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_margin="@dimen/dice_button_padding" android:text="@string/d20" android:layout_weight="1.0" android:textAllCaps="false" />
+            <Button android:onClick="btnActionOnClick" android:textSize="@dimen/textSizeDiceButton" android:id="@id/buttonD12" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_margin="@dimen/dice_button_padding" android:text="@string/d12" android:layout_weight="1.0" android:textAllCaps="false" />
+            <Button android:onClick="btnActionOnClick" android:textSize="@dimen/textSizeDiceButton" android:id="@id/buttonD10" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_margin="@dimen/dice_button_padding" android:text="@string/d10" android:layout_weight="1.0" android:textAllCaps="false" />
+        </TableRow>
+        <TableRow android:layout_width="fill_parent" android:layout_height="0.0dip" android:weightSum="5.0" android:layout_weight="3.0">
+            <Button android:onClick="btnActionOnClick" android:textSize="@dimen/textSizeDiceButton" android:id="@id/buttonD8" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_margin="@dimen/dice_button_padding" android:text="@string/d8" android:layout_weight="1.0" android:textAllCaps="false" />
+            <Button android:onClick="btnActionOnClick" android:textSize="@dimen/textSizeDiceButton" android:id="@id/buttonD6" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_margin="@dimen/dice_button_padding" android:text="@string/d6" android:layout_weight="1.0" android:textAllCaps="false" />
+            <Button android:onClick="btnActionOnClick" android:textSize="@dimen/textSizeDiceButton" android:id="@id/buttonD4" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_margin="@dimen/dice_button_padding" android:text="@string/d4" android:layout_weight="1.0" android:textAllCaps="false" />
+            <Button android:onClick="btnActionOnClick" android:textSize="@dimen/textSizeDiceButton" android:id="@id/buttonD3" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_margin="@dimen/dice_button_padding" android:text="@string/d3" android:layout_weight="1.0" android:textAllCaps="false" />
+            <Button android:onClick="btnActionOnClick" android:textSize="@dimen/textSizeDiceButton" android:id="@id/buttonD2" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_margin="@dimen/dice_button_padding" android:text="@string/d2" android:layout_weight="1.0" android:textAllCaps="false" />
+        </TableRow>
+        <TableRow android:layout_width="fill_parent" android:layout_height="0.0dip" android:weightSum="12.0" android:layout_weight="5.0">
+            <Button android:onClick="btnActionOnClick" android:textSize="@dimen/textSizeNumberButton" android:id="@id/button1" android:layout_width="0.0px" android:layout_height="fill_parent" android:layout_margin="@dimen/dice_button_padding" android:text="1" android:layout_weight="1.0" />
+            <Button android:onClick="btnActionOnClick" android:textSize="@dimen/textSizeNumberButton" android:id="@id/button2" android:layout_width="0.0px" android:layout_height="fill_parent" android:layout_margin="@dimen/dice_button_padding" android:text="2" android:layout_weight="1.0" />
+            <Button android:onClick="btnActionOnClick" android:textSize="@dimen/textSizeNumberButton" android:id="@id/button3" android:layout_width="0.0px" android:layout_height="fill_parent" android:layout_margin="@dimen/dice_button_padding" android:text="3" android:layout_weight="1.0" />
+            <Button android:onClick="btnActionOnClick" android:textSize="@dimen/textSizeNumberButton" android:id="@id/button4" android:layout_width="0.0px" android:layout_height="fill_parent" android:layout_margin="@dimen/dice_button_padding" android:text="4" android:layout_weight="1.0" />
+            <Button android:onClick="btnActionOnClick" android:textSize="@dimen/textSizeNumberButton" android:id="@id/button5" android:layout_width="0.0px" android:layout_height="fill_parent" android:layout_margin="@dimen/dice_button_padding" android:text="5" android:layout_weight="1.0" />
+            <Button android:onClick="btnActionOnClick" android:textSize="@dimen/textSizeNumberButton" android:id="@id/button6" android:layout_width="0.0px" android:layout_height="fill_parent" android:layout_margin="@dimen/dice_button_padding" android:text="6" android:layout_weight="1.0" />
+            <Button android:onClick="btnActionOnClick" android:textSize="@dimen/textSizeNumberButton" android:id="@id/button7" android:layout_width="0.0px" android:layout_height="fill_parent" android:layout_margin="@dimen/dice_button_padding" android:text="7" android:layout_weight="1.0" />
+            <Button android:onClick="btnActionOnClick" android:textSize="@dimen/textSizeNumberButton" android:id="@id/button8" android:layout_width="0.0px" android:layout_height="fill_parent" android:layout_margin="@dimen/dice_button_padding" android:text="8" android:layout_weight="1.0" />
+            <Button android:onClick="btnActionOnClick" android:textSize="@dimen/textSizeNumberButton" android:id="@id/button9" android:layout_width="0.0px" android:layout_height="fill_parent" android:layout_margin="@dimen/dice_button_padding" android:text="9" android:layout_weight="1.0" />
+            <Button android:onClick="btnActionOnClick" android:textSize="@dimen/textSizeNumberButton" android:id="@id/button0" android:layout_width="0.0px" android:layout_height="fill_parent" android:layout_margin="@dimen/dice_button_padding" android:text="0" android:layout_weight="1.0" />
+            <Button android:onClick="btnActionOnClick" android:textSize="@dimen/textSizeNumberButton" android:id="@id/buttonMinus" android:layout_width="0.0px" android:layout_height="fill_parent" android:layout_margin="@dimen/dice_button_padding" android:text="-" android:layout_weight="1.0" />
+            <Button android:onClick="btnActionOnClick" android:textSize="@dimen/textSizeNumberButton" android:id="@id/buttonPlus" android:layout_width="0.0px" android:layout_height="fill_parent" android:layout_margin="@dimen/dice_button_padding" android:text="+" android:layout_weight="1.0" />
+        </TableRow>
+        <TableRow android:layout_width="fill_parent" android:layout_height="0.0dip" android:weightSum="6.0" android:layout_weight="3.0">
+            <Button android:onClick="btnRollOnClick" android:textSize="@dimen/textSizeDiceButton" android:gravity="center" android:id="@id/buttonRoll" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_margin="@dimen/dice_button_padding" android:text="@string/roll_sequence" android:layout_weight="6.0" />
+        </TableRow>
+    </TableLayout>
+</LinearLayout>

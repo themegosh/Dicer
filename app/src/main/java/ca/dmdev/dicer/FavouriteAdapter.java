@@ -3,7 +3,9 @@ package ca.dmdev.dicer;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.media.Image;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +30,9 @@ public class FavouriteAdapter extends BaseAdapter{
     private TextView txtFavSequence;
     private TextView txtFavSequenceData;
     private ImageButton btnFavExpander;
+    private ImageButton btnDelete;
     private RelativeLayout layoutHiddenSequence;
+    private DatabaseConnector db;
 
     public FavouriteAdapter(Activity activity, ArrayList<FavouriteSequence> mDataset){
         super();
@@ -55,12 +59,16 @@ public class FavouriteAdapter extends BaseAdapter{
     public View getView(final int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater=activity.getLayoutInflater();
         convertView=inflater.inflate(R.layout.favourites_row_layout, parent, false);
+        db = new DatabaseConnector(convertView.getContext());
+
+
         txtFavRollTotal=(TextView) convertView.findViewById(R.id.txtFavRollTotal);
         txtFavTitle=(TextView) convertView.findViewById(R.id.txtFavTitle);
         txtFavSequence=(TextView) convertView.findViewById(R.id.txtFavSequence);
         txtFavSequenceData=(TextView) convertView.findViewById(R.id.txtFavSequenceData);
         btnFavExpander=(ImageButton) convertView.findViewById(R.id.btnFavExpander);
         layoutHiddenSequence=(RelativeLayout) convertView.findViewById(R.id.layoutHiddenSequence);
+        btnDelete=(ImageButton) convertView.findViewById(R.id.btnDeleteFav);
 
         txtFavRollTotal.setText(String.valueOf(mDataset.get(position).getTotal()));
         txtFavTitle.setText(String.valueOf(mDataset.get(position).getTitle()));
@@ -70,6 +78,10 @@ public class FavouriteAdapter extends BaseAdapter{
         convertView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 mDataset.get(position).reRollShowPopup(v);
+                ((MainActivity) v.getContext()).addSequenceToHistory(mDataset.get(position).clone()); //save this roll to the history
+                db.open();
+                db.updateSequence(mDataset.get(position).clone()); //save this roll to the history
+                db.close();
                 notifyDataSetChanged();
             }
         });
@@ -85,6 +97,35 @@ public class FavouriteAdapter extends BaseAdapter{
                     layoutHiddenSequence.setVisibility(View.GONE);
                     imgBtn.setImageResource(R.drawable.ic_arrow_down_black_md);
                 }
+            }
+        });
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+                                db.open();
+                                db.deleteContact(mDataset.get(position).getId()); //delete them
+                                db.close();
+                                mDataset.remove(position);
+                                notifyDataSetChanged();
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //No button clicked
+                                break;
+                        }
+                    }
+                };
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                builder.setMessage("Are you sure you want to delete \"" + mDataset.get(position).getTitle() + "\"?").setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
+
             }
         });
 

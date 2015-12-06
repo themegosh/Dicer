@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private int currentTabIndex;
     private ArrayList<Sequence> sequenceHistory;
     private ArrayList<FavouriteSequence> sequenceFavourites;
+    DatabaseConnector dbC;
 
     public MainActivity(){
         sequenceHistory = new ArrayList<>();
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Create the adapter that will return a fragment for each tab
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
@@ -70,13 +72,41 @@ public class MainActivity extends AppCompatActivity {
             public void onPageScrollStateChanged(int state) {
             }
         });
+
+        // fix fragments crashing on orientation change!
+        if (savedInstanceState != null) {
+            mSectionsPagerAdapter.rollerFragment = (RollerFragment) getSupportFragmentManager().getFragment(
+                    savedInstanceState, RollerFragment.class.getName());
+            mSectionsPagerAdapter.favouritesFragment = (FavouritesFragment) getSupportFragmentManager().getFragment(
+                    savedInstanceState, FavouritesFragment.class.getName());
+            mSectionsPagerAdapter.historyFragment = (HistoryFragment) getSupportFragmentManager().getFragment(
+                    savedInstanceState, HistoryFragment.class.getName());
+        }
+        if (mSectionsPagerAdapter.rollerFragment == null)
+            mSectionsPagerAdapter.rollerFragment = new RollerFragment();
+        if (mSectionsPagerAdapter.favouritesFragment == null)
+            mSectionsPagerAdapter.favouritesFragment = new FavouritesFragment();
+        if (mSectionsPagerAdapter.historyFragment == null)
+            mSectionsPagerAdapter.historyFragment = new HistoryFragment();
+
+        dbC = new DatabaseConnector(MainActivity.this);
+        dbC.open();
+        sequenceFavourites = dbC.getAllFavourites();
+        dbC.close();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+
+        super.onSaveInstanceState(outState);
+        getSupportFragmentManager()
+                .putFragment(outState, RollerFragment.class.getName(), mSectionsPagerAdapter.rollerFragment);
     }
 
     //roll fragment buttons onClick triggers to fragment functions
-    public void btnDiceOnClick(View v) { mSectionsPagerAdapter.rollerFragment.btnDiceOnClick(v); }
-    public void btnNumOnClick(View v) { mSectionsPagerAdapter.rollerFragment.btnNumOnClick(v); }
-    public void btnOperandOnClick(View v) { mSectionsPagerAdapter.rollerFragment.btnOperandOnClick(v); }
+    public void btnActionOnClick(View v) { mSectionsPagerAdapter.rollerFragment.btnActionOnClick(v); }
     public void btnRollOnClick(View v) { mSectionsPagerAdapter.rollerFragment.btnRollOnClick(v); }
+    public void btnDeleteOnClick(View v) { mSectionsPagerAdapter.rollerFragment.btnDeleteOnClick(v); }
 
     //floating action buttons: save/clear
     public void fabClearOnClick(View v) {
@@ -96,10 +126,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void addSequenceToHistory(Sequence sq) {
         sequenceHistory.add(0, sq);
+        mSectionsPagerAdapter.historyFragment.refreshList();
     }
+
+
     public void addSequenceToFavourites(Sequence sq, String title){
-        sequenceFavourites.add(0, new FavouriteSequence(sq, title));
+        FavouriteSequence fs = new FavouriteSequence(sq, title);
+        mSectionsPagerAdapter.historyFragment.refreshList();
+        sequenceFavourites.add(fs);
+        dbC.open();
+        dbC.insertSequence(fs);
+        dbC.close();
     }
+
     public ArrayList<Sequence> getSequenceHistory(){
         return sequenceHistory;
     }

@@ -58,8 +58,10 @@ public class HistoryAdapter extends BaseAdapter {
 
         convertView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                mDataset.get(position).reRollShowPopup(v);
-                notifyDataSetChanged();
+                Sequence sq = mDataset.get(position).clone(); //clone the tapped sequence
+                mDataset.add(0, sq); //add it to the top
+                sq.reRollShowPopup(v); //show the roll
+                notifyDataSetChanged(); //update the list visually
             }
         });
 
