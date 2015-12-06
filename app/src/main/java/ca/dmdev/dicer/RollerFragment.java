@@ -107,6 +107,18 @@ public class RollerFragment extends Fragment {
     }
     public void btnActionOnClick(View view) {
         Button b = (Button)view;
+
+        if (isNumeric(b.getText().toString())) {
+            if (sq.getSq().size() > 0){
+                if (isNumeric(sq.getSq().get(sq.getSq().size() - 1).toString())) {
+                    if (sq.getSq().get(sq.getSq().size() - 1).toString().length() > 3) {
+                        Toast.makeText(view.getContext(), "You cannot enter a number with more than 4 digits.",
+                                Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+            }
+        }
         sq.addAction(b.getText().toString());
         txtSequence.setText(sq.toString());
     }
@@ -150,5 +162,14 @@ public class RollerFragment extends Fragment {
                         Toast.LENGTH_LONG).show();
             }
         //}
+    }
+
+    private boolean isNumeric(String str)
+    {
+        for (char c : str.toCharArray())
+        {
+            if (!Character.isDigit(c)) return false;
+        }
+        return true;
     }
 }
