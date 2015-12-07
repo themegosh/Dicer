@@ -12,6 +12,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     RollerFragment rollerFragment;
     FavouritesFragment favouritesFragment;
     HistoryFragment historyFragment;
+    AboutFragment aboutFragment;
 
     public SectionsPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -30,16 +31,20 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             favouritesFragment = FavouritesFragment.newInstance();
             return favouritesFragment;
         }
-        else {
+        else if (position == 2) {
             historyFragment = HistoryFragment.newInstance();
             return historyFragment;
+        }
+        else{
+            aboutFragment = AboutFragment.newInstance();
+            return aboutFragment;
         }
     }
 
     @Override
     public int getCount() {
         // Show 3 total pages.
-        return 3;
+        return 4;
     }
 
     @Override
@@ -51,6 +56,8 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 return "Favourites";
             case 2:
                 return "History";
+            case 3:
+                return "About";
         }
         return null;
     }
