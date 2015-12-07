@@ -34,13 +34,15 @@ public class Sequence implements Serializable {
     //Processing an "action" in the following forms: "+", "-", "1", "1d5"
     //add each action to the sequence and cast the right object class
     public void addAction(String str){
+        str = str.trim();
         boolean isDice = false;
         String firstHalf = "";
         String secondHalf = "";
         //determine what we have (dice, operator, or number)
         if (str.charAt(0) == '+' || str.charAt(0) == '-'){ //handle operator processing
-            if (sq.size() > 0 && !sq.get(sq.size() - 1).toString().equalsIgnoreCase("+") && !sq.get(sq.size() - 1).toString().equalsIgnoreCase("-")) //if this isn't the first action, and the last wasnt an operator
-                sq.add(str.charAt(0)); //add it
+            if (sq.size() > 0)
+                if(!sq.get(sq.size() - 1).toString().equalsIgnoreCase("+") && !sq.get(sq.size() - 1).toString().equalsIgnoreCase("-")) //if this isn't the first action, and the last wasnt an operator
+                    sq.add(str.charAt(0)); //add it
         } else { //either a dice or a number
             for (int i = 0; i < str.length(); i++) { //loop through to determine what it is
                 if (str.charAt(i) == 'd') //we've got a dice
@@ -107,20 +109,20 @@ public class Sequence implements Serializable {
 
     //reroll the entire sequence, redoing totals and store the dice results in lastSequenceData
     public void reRoll() {
-        String operation = "+";
+        Character operation = '+';
         lastTotal = 0;
         sequenceData = "";
 
         //each object in the sequence
         for (int i = 0; i < sq.size(); i++) {
             if (sq.get(i).getClass() == Integer.class) { //number
-                if (operation.equalsIgnoreCase("+")){
+                if (operation == '+'){
                     lastTotal += (Integer) sq.get(i);
                     if (i > 0)
                         sequenceData += " + ";
                     sequenceData += Integer.valueOf((Integer) sq.get(i));
                 }
-                else if (operation.equalsIgnoreCase("-")){
+                else if (operation == '-'){
                     lastTotal -= (Integer) sq.get(i);
                     if (i > 0)
                         sequenceData += " - ";
@@ -130,13 +132,13 @@ public class Sequence implements Serializable {
                     Log.d("Dicer CRITCAL ERRROR: ", "reRoll operation is NOT \"+\" or \"-\"... operation: " + operation); //this will probably crash
             }
             else if (sq.get(i).getClass() == Dice.class) { //Dice
-                if (operation.equalsIgnoreCase("+")) {
+                if (operation == '+') {
                     lastTotal += ((Dice) sq.get(i)).roll();
                     if (i > 0)
                         sequenceData += " + ";
                     sequenceData += ((Dice) sq.get(i)).getLastRoll();
                 }
-                else if (operation.equalsIgnoreCase("-")){
+                else if (operation == '-'){
                     lastTotal -= ((Dice) sq.get(i)).roll();
                     if (i > 0)
                         sequenceData += " - ";
@@ -145,13 +147,14 @@ public class Sequence implements Serializable {
                 else
                 Log.d("Dicer CRITCAL ERRROR: ", "reRoll operation is NOT \"+\" or \"-\"... operation: " + operation); //this will probably crash
             }
-            else if (sq.get(i).getClass() == String.class) { //an operator
-                    operation = ((String)sq.get(i));
+            else if (sq.get(i).getClass() == Character.class) { //an operator
+                    operation = ((Character)sq.get(i));
 
             }
             else
-                Log.d("Dicer CRITCAL ERRROR: ", "reRoll sq.get(i) resulted in non-operator, non-number, non-int, non-dice"); //this will probably crash
+                Log.d("Dicer CRITCAL ERRROR: ", "reRoll sq.get(i) resulted in non-operator, non-number, non-int, non-dice" + sq.get(i).getClass().toString()); //this will probably crash
         }
+        Log.d("Dicer: ", "reRoll sq.toString" + sq.toString());
     }
 
     public void reRollShowPopup(View v){
@@ -179,8 +182,9 @@ public class Sequence implements Serializable {
     public String toString(){
         String str = "";
 
-        for (int i = 0; i < sq.size(); i++)
+        for (int i = 0; i < sq.size(); i++) {
             str += sq.get(i).toString() + " ";
+        }
 
         return str;
     }
@@ -192,12 +196,7 @@ public class Sequence implements Serializable {
     public Sequence clone() {
         ArrayList<Object> clone = new ArrayList<Object>();
         for(Object item: sq){
-            if (item.getClass() == Dice.class)
-                clone.add(((Dice)item).clone());
-            else if (item.getClass() == String.class)
-                clone.add(item);
-            else if (item.getClass() == Integer.class)
-                clone.add(item);
+            clone.add(item);
         }
         return new Sequence(clone, sequenceData, lastTotal, id);
     }

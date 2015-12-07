@@ -67,8 +67,6 @@ public class RollerFragment extends Fragment {
         return v;
     }
 
-
-
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         // Save the user's current game state
