@@ -51,7 +51,10 @@ public class RollerFragment extends Fragment {
         //View v = inflater.inflate(R.layout.roller_fragment, container, false);
 
         FrameLayout v = new FrameLayout(getActivity());
-        sq = new Sequence();
+
+        if (sq == null) //only set new sequence if we need to otherwise sq is saved from previous tab change
+            sq = new Sequence();
+
         if (savedInstanceState != null && savedInstanceState.getStringArrayList(SEQUENCE) != null){
             for (int i = 0; i < savedInstanceState.getStringArrayList(SEQUENCE).size(); i++){
                 sq.addAction(savedInstanceState.getStringArrayList(SEQUENCE).get(i));
