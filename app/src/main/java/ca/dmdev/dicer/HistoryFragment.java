@@ -85,24 +85,6 @@ public class HistoryFragment extends Fragment {
 
             sq = null;
         }
-
-        /*List<String[]> list = Arrays.asList(arrayReceived);
-        List result = new ArrayList();
-        for(String[] array : list){
-            result.add( Arrays.asList(array) );
-        }
-
-        for (int i = 0; i < list.size(); i++) {
-            sq = new Sequence();
-            sq.setLastTotal(((int[]) savedInstanceState.getSerializable(H_TOTAL))[i]);
-            sq.setSequenceData(((String[]) savedInstanceState.getSerializable(H_DATA))[i]);
-            for (int x = 0; x < list.get(i).length; x++){
-                if (list.get(i)[x] != null)
-                    sq.addAction(list.get(i)[x]);
-            }
-            ((MainActivity) getActivity()).getSequenceHistory().add(sq.clone());
-            sq = null;
-        }*/
     }
 
     @Override
