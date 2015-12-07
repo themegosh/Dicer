@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private final int POSITION_ROLLER = 0;
     private final int POSITION_FAVOURITE = 1;
     private final int POSITION_HISTORY = 2;
+    private final int POSITION_ABOUT = 3;
 
     //vars
     private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -61,9 +62,13 @@ public class MainActivity extends AppCompatActivity {
                     currentTabIndex = POSITION_FAVOURITE;
                     fabClear.hide();
                     fabSave.hide();
-                } else {
+                } else if (position == POSITION_HISTORY){
                     currentTabIndex = POSITION_HISTORY;
                     fabClear.show(); //show only clear all history button
+                    fabSave.hide();
+                } else if (position == POSITION_ABOUT) {
+                    currentTabIndex = POSITION_ABOUT;
+                    fabClear.hide(); //show nothing
                     fabSave.hide();
                 }
             }
