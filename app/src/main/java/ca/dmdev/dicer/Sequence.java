@@ -148,8 +148,10 @@ public class Sequence implements Serializable {
                 Log.d("Dicer CRITCAL ERRROR: ", "reRoll operation is NOT \"+\" or \"-\"... operation: " + operation); //this will probably crash
             }
             else if (sq.get(i).getClass() == Character.class) { //an operator
-                    operation = ((Character)sq.get(i));
-
+                operation = (Character)sq.get(i);
+            }
+            else if (sq.get(i).getClass() == String.class) {
+                operation = ((String)sq.get(i)).charAt(0);
             }
             else
                 Log.d("Dicer CRITCAL ERRROR: ", "reRoll sq.get(i) resulted in non-operator, non-number, non-int, non-dice" + sq.get(i).getClass().toString()); //this will probably crash
