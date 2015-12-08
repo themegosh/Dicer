@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="80dp">
+    android:layout_height="wrap_content">
 
 
 
     <TextView
         android:id="@+id/txtFavRollTotal"
         android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:layout_alignParentBottom="true"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="false"
         android:layout_alignParentTop="true"
         android:layout_marginRight="6dip"
         android:contentDescription="TODO"
@@ -24,21 +24,22 @@
     <TextView
         android:id="@+id/txtRollHistoryData"
         android:layout_width="fill_parent"
-        android:layout_height="26dip"
-        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="false"
         android:layout_alignParentRight="true"
         android:layout_toRightOf="@id/txtFavRollTotal"
         android:ellipsize="marquee"
-        android:singleLine="true"
+        android:singleLine="false"
         android:text="Sequence Details: 1d6: (6) + 10"
         android:textSize="12sp"
-        android:textColor="@android:color/secondary_text_light" />
+        android:textColor="@android:color/secondary_text_light"
+        android:layout_below="@+id/txtRollHistorySequence"
+        android:layout_marginRight="15dp" />
 
     <TextView
         android:id="@+id/txtRollHistorySequence"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/txtRollHistoryData"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_alignWithParentIfMissing="true"
@@ -46,9 +47,19 @@
         android:gravity="center_vertical"
         android:text="Sequence: 1d6 + 10"
         android:textSize="20sp"
-        android:textColor="@android:color/primary_text_light" />
+        android:textColor="@android:color/primary_text_light"
+        android:layout_alignTop="@+id/txtFavRollTotal"
+        android:layout_marginTop="10dp" />
 
-
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnSaveHistory"
+        android:layout_alignBottom="@+id/txtFavRollTotal"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:hapticFeedbackEnabled="false"
+        android:src="@android:drawable/ic_menu_save" />
 
 
 </RelativeLayout>

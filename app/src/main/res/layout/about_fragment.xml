@@ -3,18 +3,24 @@
     android:orientation="vertical" android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-    <TextView android:textSize="48.0sp"  android:gravity="center" android:id="@+id/textViewTitle"  android:paddingTop="32.0dip" android:paddingBottom="30.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/app_name" />
+    <TextView android:textSize="48.0sp"  android:gravity="center" android:id="@+id/lblAboutTitle"  android:paddingTop="25.0dip" android:paddingBottom="25.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/app_name" />
     <ScrollView android:id="@+id/scrollViewAbout" android:padding="16.0dip" android:scrollbars="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
-        android:layout_below="@id/textViewTitle">
+        android:layout_below="@+id/lblAboutTitle">
         <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
             <TextView android:textSize="@dimen/abc_text_size_small_material" android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content"
-                android:text="The simple dice sequence roller. On the Sequence tab, tap a dice to add it to a sequence. Dice are represnted in the format of [count]d[sides] or 1d6 for a six sided dice. Once you are satisfied with your sequence, add it to favourites tab with the Heart Floating Action Button to save it to the app. Pressing the Backspace button will undo the last sequence addition. Pressing the Trash Floating Action Button will clear the sequence. Tap on a favourite or history list item to reroll the dice updating it and adding a copy of the roll data to the History tab. " />
-            <TextView android:textSize="@dimen/abc_text_size_small_material" android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="16.0dip" android:text="By Doug Mathew" />
-            <TextView android:textSize="@dimen/abc_text_size_small_material" android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" android:text="Completed Dec. 7, 2015" />
-            <TextView android:textSize="@dimen/abc_text_size_small_material" android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="16.0dip" android:text="See it on Github" />
-            <TextView android:textSize="@dimen/abc_text_size_medium_material" android:gravity="center" android:autoLink="web" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" android:text="www.github.com/themegosh/Dicer/" />
-            <TextView android:textSize="@dimen/abc_text_size_small_material" android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="16.0dip" android:text="My Website" />
-            <TextView android:textSize="@dimen/abc_text_size_medium_material" android:gravity="center" android:autoLink="web" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" android:text="dmdev.ca" />
+                android:text="@string/lblAboutDescription"
+                android:id="@+id/lblAboutDescription" />
+            <TextView android:textSize="@dimen/abc_text_size_small_material" android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="16.0dip" android:text="By Doug Mathew"
+                android:id="@+id/lblAboutBy" />
+
+            <TextView android:textSize="@dimen/abc_text_size_small_material" android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="16.0dip" android:text="See it on Github"
+                android:id="@+id/lblSeeItOn" />
+            <TextView android:textSize="@dimen/abc_text_size_medium_material" android:gravity="center" android:autoLink="web" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" android:text="www.github.com/themegosh/Dicer/"
+                android:id="@+id/lblGithub" />
+            <TextView android:textSize="@dimen/abc_text_size_small_material" android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="16.0dip" android:text="My Website"
+                android:id="@+id/lblMySite" />
+            <TextView android:textSize="@dimen/abc_text_size_medium_material" android:gravity="center" android:autoLink="web" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" android:text="dmdev.ca"
+                android:id="@+id/lblSiteUrl" />
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

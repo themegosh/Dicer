@@ -33,4 +33,5 @@
     <string name="lblSaveTitle">Save Title:</string>
     <string name="lblDiceSequence">Dice sequence to save:</string>
     <string name="confirm_discard_unsaved">Discard unsaved favourite?</string>
+    <string name="lblAboutDescription">The simple dice sequence roller. On the Sequence tab, tap a dice to add it to a sequence. Dice are represnted in the format of [count]d[sides] or 1d6 for a six sided dice. Once you are satisfied with your sequence, add it to favourites tab with the Heart Floating Action Button to save it to the app. Pressing the Backspace button will undo the last sequence addition. Pressing the Trash Floating Action Button will clear the sequence. Tap on a favourite or history list item to reroll the dice updating it and adding a copy of the roll data to the History tab.</string>
 </resources>
