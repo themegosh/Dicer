@@ -51,15 +51,5 @@
         android:layout_alignTop="@+id/txtFavRollTotal"
         android:layout_marginTop="10dp" />
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnSaveHistory"
-        android:layout_alignBottom="@+id/txtFavRollTotal"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:hapticFeedbackEnabled="false"
-        android:src="@android:drawable/ic_menu_save" />
-
 
 </RelativeLayout>

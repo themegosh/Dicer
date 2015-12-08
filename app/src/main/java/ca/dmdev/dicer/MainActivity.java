@@ -1,7 +1,9 @@
 package ca.dmdev.dicer;
 
+import android.content.DialogInterface;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
@@ -119,8 +121,26 @@ public class MainActivity extends AppCompatActivity {
             mSectionsPagerAdapter.rollerFragment.fabClearOnClick(v);
         }
         else if (currentTabIndex == POSITION_HISTORY) { //clear the history listview
-            sequenceHistory.clear();
-            mSectionsPagerAdapter.historyFragment.refreshList();
+            DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    switch (which){
+                        case DialogInterface.BUTTON_POSITIVE:
+                            sequenceHistory.clear();
+                            mSectionsPagerAdapter.historyFragment.refreshList();
+                            break;
+
+                        case DialogInterface.BUTTON_NEGATIVE:
+                            //No button clicked
+                            break;
+                    }
+                }
+            };
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+            builder.setMessage("Are you sure you want to clear all roll history?").setPositiveButton("Yes", dialogClickListener)
+                    .setNegativeButton("No", dialogClickListener).show();
+
         }
     }
     public void fabSaveOnClick(View v) {
