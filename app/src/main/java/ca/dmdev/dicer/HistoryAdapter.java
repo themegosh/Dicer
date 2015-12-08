@@ -53,7 +53,10 @@ public class HistoryAdapter extends BaseAdapter {
         txtHistoryData=(TextView) convertView.findViewById(R.id.txtRollHistoryData);
 
         txtHistoryTotal.setText(String.valueOf(mDataset.get(position).getTotal()));
-        txtHistorySequence.setText(mDataset.get(position).toString());
+        if (mDataset.get(position).getClass() == FavouriteSequence.class)
+            txtHistorySequence.setText(((FavouriteSequence)mDataset.get(position)).getTitle() + ": " + mDataset.get(position).toString());
+        else
+            txtHistorySequence.setText(mDataset.get(position).toString());
         txtHistoryData.setText(mDataset.get(position).getSequenceData());
 
         convertView.setOnClickListener(new View.OnClickListener() {
