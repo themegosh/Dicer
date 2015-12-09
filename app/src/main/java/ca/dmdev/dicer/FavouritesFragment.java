@@ -5,10 +5,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -17,7 +15,8 @@ import java.util.ArrayList;
  */
 public class FavouritesFragment extends Fragment {
 
-    private ListView historyView;
+    private ListView favView;
+    private TextView lblFav;
     private ArrayList<FavouriteSequence> sequenceFavourite;
     private FavouriteAdapter adapter;
 
@@ -37,23 +36,11 @@ public class FavouritesFragment extends Fragment {
         View v = inflater.inflate(R.layout.favourites_fragment, container, false);
 
         sequenceFavourite = ((MainActivity) getActivity()).getSequenceFavourites(); //add sequence to history
-        historyView = (ListView) v.findViewById(R.id.favouritesView);
+        favView = (ListView) v.findViewById(R.id.lstvFavourites);
+        lblFav = (TextView) v.findViewById(R.id.lblFavDescr);
         adapter = new FavouriteAdapter(getActivity(), sequenceFavourite);
-        historyView.setAdapter(adapter);
-
-        /*historyView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    final int position, long id) {
-
-                Toast.makeText(getActivity().getApplicationContext(), "Click! position: " + position + " id: " + id + " view: " + view.getClass().toString(),
-                        Toast.LENGTH_LONG).show();
-            }
-        });*/
-
-
-
+        favView.setAdapter(adapter);
+        favView.setEmptyView(lblFav);
         return v;
     }
 }

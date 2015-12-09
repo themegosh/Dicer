@@ -13,4 +13,20 @@
         android:layout_alignParentTop="true" >
     </ListView>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/historyDesc"
+        android:id="@+id/lblHistoryDescr"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="false"
+        android:layout_alignWithParentIfMissing="false"
+        android:textColor="@color/secondary_text_default_material_light"
+        android:layout_centerInParent="true"
+        android:layout_margin="15dp"
+        android:textSize="@dimen/abc_text_size_medium_material"
+        android:textAlignment="center" />
+
 </RelativeLayout>

@@ -1,17 +1,33 @@
-<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:layout_height="fill_parent"
     android:padding="6dip"
     tools:context=".MainActivity$FavouritesFragment">
 
     <ListView
-        android:id="@+id/favouritesView"
+        android:id="@+id/lstvFavourites"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true" >
     </ListView>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/favDesc"
+        android:id="@+id/lblFavDescr"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="false"
+        android:layout_alignWithParentIfMissing="false"
+        android:textColor="@color/secondary_text_default_material_light"
+        android:layout_centerInParent="true"
+        android:layout_margin="15dp"
+        android:textSize="@dimen/abc_text_size_medium_material"
+        android:textAlignment="center" />
 
-</LinearLayout >
+
+</RelativeLayout >

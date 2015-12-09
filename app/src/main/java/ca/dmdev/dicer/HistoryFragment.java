@@ -23,6 +23,7 @@ import java.util.List;
 public class HistoryFragment extends Fragment {
 
     private ListView historyView;
+    private TextView lblHistoryDesc;
     private ArrayList<Sequence> sequenceHistory;
     private HistoryAdapter adapter;
     static final String H_TOTAL = "H_TOTAL";
@@ -47,8 +48,10 @@ public class HistoryFragment extends Fragment {
 
         sequenceHistory = ((MainActivity) getActivity()).getSequenceHistory(); //add sequence to history
         historyView = (ListView) v.findViewById(R.id.historyView);
+        lblHistoryDesc = (TextView) v.findViewById(R.id.lblHistoryDescr);
         adapter = new HistoryAdapter(getActivity(), sequenceHistory);
         historyView.setAdapter(adapter);
+        historyView.setEmptyView(lblHistoryDesc);
 
         if (savedInstanceState != null && orientChanged == false)
             loadSavedInstanceState(savedInstanceState);

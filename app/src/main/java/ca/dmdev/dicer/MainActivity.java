@@ -157,11 +157,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void addSequenceToFavourites(Sequence sq, String title){
         FavouriteSequence fs = new FavouriteSequence(sq, title);
-        mSectionsPagerAdapter.historyFragment.refreshList();
         sequenceFavourites.add(fs);
         dbC.open();
         dbC.insertSequence(fs);
         dbC.close();
+        mSectionsPagerAdapter.historyFragment.refreshList();
     }
 
     public ArrayList<Sequence> getSequenceHistory(){

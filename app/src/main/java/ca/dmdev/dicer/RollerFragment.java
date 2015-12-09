@@ -132,7 +132,7 @@ public class RollerFragment extends Fragment {
         txtSequence.setText(sq.toString());
 
         Toast.makeText(getActivity().getApplicationContext(), "Dice sequence cleared.",
-                Toast.LENGTH_LONG).show();
+                Toast.LENGTH_SHORT).show();
     }
     public void fabSaveOnClick(View v) {
         if (txtSequence.getText().toString().isEmpty()){
