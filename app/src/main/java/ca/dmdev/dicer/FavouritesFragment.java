@@ -43,4 +43,10 @@ public class FavouritesFragment extends Fragment {
         favView.setEmptyView(lblFav);
         return v;
     }
+
+    public void refreshList(){
+        if (adapter == null)
+            adapter = new FavouriteAdapter(getActivity(), sequenceFavourite);
+        adapter.notifyDataSetChanged();
+    }
 }

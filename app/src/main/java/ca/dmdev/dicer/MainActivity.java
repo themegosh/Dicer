@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
         dbC.open();
         dbC.insertSequence(fs);
         dbC.close();
-        mSectionsPagerAdapter.historyFragment.refreshList();
+        mSectionsPagerAdapter.favouritesFragment.refreshList();
     }
 
     public ArrayList<Sequence> getSequenceHistory(){
