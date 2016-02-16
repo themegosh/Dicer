@@ -82,7 +82,7 @@ public class DatabaseConnector
     // return a Cursor with all contact information in the database
     public ArrayList<FavouriteSequence> getAllFavourites() {
         ArrayList<FavouriteSequence> afs = new ArrayList<>();
-        FavouriteSequence fs =  new FavouriteSequence();
+        FavouriteSequence fs;
 
         open();
         try {
@@ -92,6 +92,7 @@ public class DatabaseConnector
             if (!c.moveToFirst())
                 return afs;
             do {
+                fs = new FavouriteSequence();
                 fs.setId((int)c.getLong(0));
                 fs.setTitle(c.getString(1));
                 fs.setLastTotal(c.getInt(2));
