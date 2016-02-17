@@ -118,16 +118,16 @@ public class DatabaseConnector
         finally {
             close();
         }
-    } // end method getAllContacts
+    }
 
     // delete the contact specified by the given String name
-    public void deleteContact(long id)
+    public void deleteSequence(long id)
     {
         open(); // open the database
         dbFav.delete(TABLE_SEQUENCE_FAVOURITES, "id=" + id, null);
         dbFav.delete(TABLE_SEQUENCE_ACTIONS, "sequenceId=" + id, null);
         close(); // close the database
-    } // end method deleteContact
+    } // end method deleteSequence
 
     private class DatabaseOpenHelper extends SQLiteOpenHelper
     {
@@ -138,11 +138,9 @@ public class DatabaseConnector
             super(context, name, factory, version);
         } // end DatabaseOpenHelper constructor
 
-        // creates the contacts table when the database is created
         @Override
         public void onCreate(SQLiteDatabase db)
         {
-            // query to create a new table named contacts
             String createSequenceFavourites = "CREATE TABLE "+ TABLE_SEQUENCE_FAVOURITES +
                     " (id integer primary key autoincrement," +
                     "title TEXT, total INT, sequenceData TEXT," +

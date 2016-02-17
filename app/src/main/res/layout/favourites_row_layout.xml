@@ -46,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:width = "70dp"
-            android:src="@drawable/ic_arrow_down_black_md"
+            android:src="@drawable/ic_arrow_up_black_md"
             android:layout_alignParentEnd="false"
             android:layout_alignParentRight="true"
             android:background="@android:color/transparent"
@@ -56,7 +56,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_alignParentEnd="false"
         android:layout_alignParentStart="false"
         android:layout_below="@+id/txtFavRollTotal"
