@@ -231,5 +231,27 @@ public class Sequence implements Serializable {
         return id;
     }
 
+    public boolean strToSequence(String str){
+        sq.clear();
+        return evalSequence(str);
+    }
+
+    private boolean evalSequence(String str){
+
+        int strLen = str.length();
+        for (int i = 0; i < strLen; i++){
+            char strCur = str.charAt(i);
+            if (strCur == '('){ //a bracket, call recursively
+                evalSequence(str);
+            } else if (Integer.valueOf(strCur) != 0){ //a number
+
+            } else if (strCur == '+' || strCur == '-'){
+
+            }
+        }
+
+        return true;
+    }
+
 
 }
