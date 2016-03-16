@@ -20,8 +20,8 @@
             android:gravity="center"
             android:textSize="25sp"
             android:width="70dp"
-            android:background="#e0e0e0"
-            android:textColor="@android:color/black"
+            android:background="@android:color/background_light"
+            android:textColor="@android:color/primary_text_light"
             android:layout_margin="6dp" />
 
         <TextView
@@ -32,7 +32,7 @@
             android:layout_alignWithParentIfMissing="false"
             android:text="An example Title"
             android:textSize="25sp"
-            android:textColor="@android:color/primary_text_light"
+            android:textColor="@android:color/primary_text_dark"
             android:layout_alignParentStart="false"
             android:layout_toRightOf="@+id/txtFavRollTotal"
             android:gravity="center_vertical"

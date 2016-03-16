@@ -17,8 +17,8 @@
         android:gravity="center"
         android:textSize="25sp"
         android:width="70dp"
-        android:background="#e0e0e0"
-        android:textColor="@android:color/black"
+        android:background="@android:color/background_light"
+        android:textColor="@android:color/primary_text_light"
         android:layout_margin="6dp" />
 
     <TextView
@@ -32,7 +32,7 @@
         android:singleLine="false"
         android:text="Sequence Details: 1d6: (6) + 10"
         android:textSize="12sp"
-        android:textColor="@android:color/secondary_text_light"
+        android:textColor="@android:color/secondary_text_dark"
         android:layout_below="@+id/txtRollHistorySequence"
         android:layout_marginRight="15dp" />
 
@@ -47,7 +47,7 @@
         android:gravity="center_vertical"
         android:text="Sequence: 1d6 + 10"
         android:textSize="20sp"
-        android:textColor="@android:color/primary_text_light"
+        android:textColor="@android:color/primary_text_dark"
         android:layout_alignTop="@+id/txtFavRollTotal"
         android:layout_marginTop="10dp" />
 

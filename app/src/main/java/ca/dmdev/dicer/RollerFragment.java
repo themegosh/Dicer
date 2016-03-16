@@ -29,7 +29,7 @@ public class RollerFragment extends Fragment {
 
     TextView txtSequence;
     private Sequence sq;
-    static final String SEQUENCE = "R_SEQUECE";
+    static final String SEQUENCE = "R_SEQUENCE";
 
     public RollerFragment() {
     }
@@ -48,12 +48,12 @@ public class RollerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        //View v = inflater.inflate(R.layout.roller_fragment, container, false);
-
         FrameLayout v = new FrameLayout(getActivity());
 
         if (sq == null) //only set new sequence if we need to otherwise sq is saved from previous tab change
             sq = new Sequence();
+
+        populateViewForOrientation(inflater, v);
 
         if (savedInstanceState != null && savedInstanceState.getStringArrayList(SEQUENCE) != null){
             for (int i = 0; i < savedInstanceState.getStringArrayList(SEQUENCE).size(); i++){
@@ -61,11 +61,6 @@ public class RollerFragment extends Fragment {
             }
             txtSequence.setText(sq.toString());
         }
-        populateViewForOrientation(inflater, v);
-
-
-        txtSequence = (TextView) v.findViewById(R.id.txtSequence);
-
 
         return v;
     }
@@ -148,21 +143,17 @@ public class RollerFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // Check which request we're responding to
-        //if (requestCode == PICK_CONTACT_REQUEST) {
-            // Make sure the request was successful
-            if (resultCode == Activity.RESULT_OK) {
+        if (resultCode == Activity.RESULT_OK) {
 
-                sq = (Sequence)data.getSerializableExtra("Sequence");
-                String title = data.getStringExtra("Title");
+            sq = (Sequence)data.getSerializableExtra("Sequence");
+            String title = data.getStringExtra("Title");
 
-                //save to favourites tab
-                ((MainActivity)getActivity()).addSequenceToFavourites(sq, title);
+            //save to favourites tab
+            ((MainActivity)getActivity()).addSequenceToFavourites(sq, title);
 
-                Toast.makeText(getActivity().getApplicationContext(), "Dice sequence saved.",
-                        Toast.LENGTH_LONG).show();
-            }
-        //}
+            Toast.makeText(getActivity().getApplicationContext(), "Dice sequence saved.",
+                    Toast.LENGTH_LONG).show();
+        }
     }
 
     private boolean isNumeric(String str)

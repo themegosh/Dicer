@@ -40,21 +40,21 @@
                     android:layout_height="wrap_content"
                     android:text="@string/lblSaveTitle"
                     android:singleLine="true"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@color/primary_text_default_material_dark" />
                 <EditText
                     android:id="@+id/txtTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@color/secondary_text_default_material_dark" />
                 <TextView
                     android:id="@+id/lblSequence"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/lblDiceSequence"
                     android:singleLine="true"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@color/primary_text_default_material_dark" />
                 <EditText
                     android:id="@+id/txtSequence"
                     android:layout_width="match_parent"
@@ -63,7 +63,7 @@
                     android:singleLine="true"
                     android:enabled="false"
                     android:focusable="true"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@color/secondary_text_default_material_dark" />
 
                 <Button
                     android:id="@+id/favourites_save_button"
@@ -73,7 +73,7 @@
                     android:layout_marginTop="16dp"
                     android:text="@string/btn_save_favourite"
                     android:textStyle="bold"
-                    android:textColor="#424242" />
+                    android:textColor="@color/primary_text_default_material_dark" />
 
             </LinearLayout>
         </ScrollView>
